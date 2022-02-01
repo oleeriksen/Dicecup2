@@ -10,6 +10,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private val TAG: String = "xyz"
+    lateinit var diceHistory: DiceHistoryManager;
 
     // mapping from 1..6 to drawables, the first index is unused
     private val diceId = intArrayOf(0, R.drawable.dice1,
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         btnStory.setOnClickListener { v-> onCLickStory() }
         Log.d(TAG, "OnCreate")
 
+        diceHistory = DiceHistoryManager();
     }
 
     private fun onClickRoll(){
@@ -36,6 +38,9 @@ class MainActivity : AppCompatActivity() {
 
         // set dices
         updateDicesWith(e1, e2)
+
+        diceHistory.addToHistory(History(e1, e2))
+
         Log.d(TAG, "Roll")
     }
 
