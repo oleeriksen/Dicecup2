@@ -35,12 +35,12 @@ class MainActivity : AppCompatActivity() {
     private fun onClickRoll(){
         val e1 = mRandomGenerator.nextInt(6) + 1
         val e2 = mRandomGenerator.nextInt(6) + 1
+        val e3 = mRandomGenerator.nextInt(6) + 1
 
         // set dices
-        updateDicesWith(e1, e2)
 
         diceHistory.addToHistory(History(e1, e2))
-
+        updateDicesWith(e1, e2, e3)
         Log.d(TAG, "Roll")
     }
 
@@ -50,9 +50,10 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent);
     }
 
-    private fun updateDicesWith(d1: Int, d2: Int) {
+    private fun updateDicesWith(d1: Int, d2: Int, d3: Int) {
         imgDice1.setImageResource( diceId[d1] )
         imgDice2.setImageResource( diceId[d2] )
+        imgDice3.setImageResource( diceId[d3] )
     }
 
 
