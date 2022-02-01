@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         imgDice1.setImageResource( diceId[d1] )
         imgDice2.setImageResource( diceId[d2] )
         imgDice3.setImageResource( diceId[d3] )
+        imgDice4.visibility = View.INVISIBLE
     }
 
 
