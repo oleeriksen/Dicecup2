@@ -7,6 +7,14 @@
     android:paddingRight="16dp"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/btnStory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="4dp"
+        android:text="Story" />
+
     <TextView
         android:id="@+id/tvHeader"
         android:layout_width="wrap_content"
@@ -48,12 +56,13 @@
             android:adjustViewBounds ="true"/>
 
     </LinearLayout>
+
     <Button
         android:id="@+id/btnRoll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Roll"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"/>
-    
+        android:text="Roll" />
+
 </RelativeLayout>

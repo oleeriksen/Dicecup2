@@ -1,5 +1,6 @@
 package easv.oe.dicecup2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -35,6 +36,11 @@ class MainActivity : AppCompatActivity() {
         // set dices
         updateDicesWith(e1, e2)
         Log.d(TAG, "Roll")
+    }
+
+
+    private fun onCLickStory(){
+        val intent = Intent(this, StoryActivity::class.java)
     }
 
     private fun updateDicesWith(d1: Int, d2: Int) {
