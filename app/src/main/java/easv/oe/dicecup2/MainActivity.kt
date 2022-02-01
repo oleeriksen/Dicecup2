@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.Menu
+import android.view.MenuInflater
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private val TAG: String = "xyz"
+    lateinit var diceHistory: DiceHistoryManager;
 
     // mapping from 1..6 to drawables, the first index is unused
     private val diceId = intArrayOf(0, R.drawable.dice1,
@@ -22,6 +25,12 @@ class MainActivity : AppCompatActivity() {
 
     private val mRandomGenerator = Random()
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         btnStory.setOnClickListener { v-> onCLickStory() }
         Log.d(TAG, "OnCreate")
 
+        diceHistory = DiceHistoryManager();
     }
 
     private fun onClickRoll(){
@@ -37,6 +47,8 @@ class MainActivity : AppCompatActivity() {
         val e3 = mRandomGenerator.nextInt(6) + 1
 
         // set dices
+
+        diceHistory.addToHistory(History(e1, e2))
         updateDicesWith(e1, e2, e3)
         Log.d(TAG, "Roll")
     }
