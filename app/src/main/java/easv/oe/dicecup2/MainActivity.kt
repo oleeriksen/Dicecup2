@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun onCLickStory(){
         val intent = Intent(this, StoryActivity::class.java)
+        startActivity(intent);
     }
 
     private fun updateDicesWith(d1: Int, d2: Int) {
