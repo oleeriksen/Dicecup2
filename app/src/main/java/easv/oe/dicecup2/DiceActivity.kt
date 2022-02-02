@@ -53,6 +53,12 @@ class DiceActivity : BasicActivity() {
         val e1 = mRandomGenerator.nextInt(6) + 1
         val e2 = mRandomGenerator.nextInt(6) + 1
         val e3 = mRandomGenerator.nextInt(6) + 1
+        val e4 = mRandomGenerator.nextInt(6) + 1
+        val e5 = mRandomGenerator.nextInt(6) + 1
+        val e6 = mRandomGenerator.nextInt(6) + 1
+        val e7 = mRandomGenerator.nextInt(6) + 1
+        val e8 = mRandomGenerator.nextInt(6) + 1
+        val e9 = mRandomGenerator.nextInt(6) + 1
 
         // set dices
 
@@ -87,13 +93,73 @@ class DiceActivity : BasicActivity() {
         startActivity(intent);
     }
 
+    
+
     private fun updateDicesWith(dices: Array<Int>) {
 
         when(dices.size){
+            1->{
+                imgDice1.setImageResource(diceId[dices[0]])
+            }
+            2->{
+                imgDice1.setImageResource( diceId[dices[0]] )
+                imgDice2.setImageResource( diceId[dices[1]] )
+            }
             3->{
                 imgDice1.setImageResource( diceId[dices[0]] )
                 imgDice2.setImageResource( diceId[dices[1]] )
                 imgDice3.setImageResource( diceId[dices[2]] )
+            }
+            4-> {
+                imgDice1.setImageResource(diceId[dices[0]])
+                imgDice2.setImageResource(diceId[dices[1]])
+                imgDice3.setImageResource(diceId[dices[2]])
+                imgDice4.setImageResource(diceId[dices[3]])
+            }
+            5-> {
+                imgDice1.setImageResource(diceId[dices[0]])
+                imgDice2.setImageResource(diceId[dices[1]])
+                imgDice3.setImageResource(diceId[dices[2]])
+                imgDice4.setImageResource(diceId[dices[3]])
+                imgDice5.setImageResource(diceId[dices[4]])
+            }
+            6-> {
+                imgDice1.setImageResource(diceId[dices[0]])
+                imgDice2.setImageResource(diceId[dices[1]])
+                imgDice3.setImageResource(diceId[dices[2]])
+                imgDice4.setImageResource(diceId[dices[3]])
+                imgDice5.setImageResource(diceId[dices[4]])
+                imgDice6.setImageResource(diceId[dices[5]])
+            }
+            7-> {
+                imgDice1.setImageResource(diceId[dices[0]])
+                imgDice2.setImageResource(diceId[dices[1]])
+                imgDice3.setImageResource(diceId[dices[2]])
+                imgDice4.setImageResource(diceId[dices[3]])
+                imgDice5.setImageResource(diceId[dices[4]])
+                imgDice6.setImageResource(diceId[dices[5]])
+                imgDice7.setImageResource(diceId[dices[6]])
+            }
+            8-> {
+                imgDice1.setImageResource(diceId[dices[0]])
+                imgDice2.setImageResource(diceId[dices[1]])
+                imgDice3.setImageResource(diceId[dices[2]])
+                imgDice4.setImageResource(diceId[dices[3]])
+                imgDice5.setImageResource(diceId[dices[4]])
+                imgDice6.setImageResource(diceId[dices[5]])
+                imgDice7.setImageResource(diceId[dices[6]])
+                imgDice8.setImageResource(diceId[dices[7]])
+            }
+            9-> {
+                imgDice1.setImageResource(diceId[dices[0]])
+                imgDice2.setImageResource(diceId[dices[1]])
+                imgDice3.setImageResource(diceId[dices[2]])
+                imgDice4.setImageResource(diceId[dices[3]])
+                imgDice5.setImageResource(diceId[dices[4]])
+                imgDice6.setImageResource(diceId[dices[5]])
+                imgDice7.setImageResource(diceId[dices[6]])
+                imgDice8.setImageResource(diceId[dices[7]])
+                imgDice9.setImageResource(diceId[dices[8]])
             }
             else->{
 
