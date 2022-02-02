@@ -1,7 +1,9 @@
 package easv.oe.dicecup2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * stores different greetings
@@ -11,6 +13,9 @@ public class GreetingsManager {
     private final Utils util = new Utils();
     private final List<String> DanishGreetings = new ArrayList<>();
     private final List<String> EnglishGreetings = new ArrayList<>();
+
+    private final List<String> boyNames = Arrays.asList("Liam", "Noah", "Oliver", "Elijah");
+    private final List<String> girlNames = Arrays.asList("Olivia", "Emma", "Ava", "Charlotte");
 
     public GreetingsManager() {
         initGreetings();
@@ -39,4 +44,34 @@ public class GreetingsManager {
     }
 
     //endregion
+
+    //region name checking
+
+    private Boolean checkBoyName(String name){
+        for (String boyName : boyNames) {
+            if(boyName.toLowerCase().equals(name.toLowerCase()))
+                return true;
+        }
+        return false;
+    }
+
+    private Boolean checkGirlName(String name){
+        for (String girlName : girlNames) {
+            if(girlName.toLowerCase().equals(name.toLowerCase()))
+                return true;
+        }
+        return false;
+    }
+
+    public String checkName(String name){
+        if(checkBoyName(name))
+            return "Boy";
+        if(checkGirlName(name))
+            return "Girl";
+
+        return "None";
+    }
+
+    //endregion
+
 }

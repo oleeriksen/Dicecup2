@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    tools:context=".DiceActivity">
+    tools:context=".DiceActivity"
+    android:background="@color/white">
 
     <LinearLayout
         android:id="@+id/layout1"
@@ -28,7 +29,9 @@
                 android:layout_height="wrap_content"
                 android:text="Dicecup - basic version"
                 android:textSize="25dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                />
 
             <TextView
                 android:id="@+id/tvHeader3"
@@ -46,7 +49,8 @@
                 android:layout_weight="1"
                 android:text="2"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
 
         </LinearLayout>
 
@@ -63,22 +67,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginEnd="58dp"
         android:layout_marginBottom="4dp"
+        android:layout_toStartOf="@+id/btnRoll"
         android:text="Story" />
+
+    <Button
+        android:id="@+id/btnRoll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Roll" />
 
     <LinearLayout
         android:id="@+id/layoutDices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout1"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="20dp"
         android:background="@color/board"
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/diceRow1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/diceRow1">
+            android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/imgDice1"
                 android:layout_width="wrap_content"
@@ -115,10 +130,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/diceRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/diceRow2"
             android:orientation="horizontal">
+
             <ImageView
                 android:id="@+id/imgDice4"
                 android:layout_width="wrap_content"
@@ -155,9 +171,10 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/diceRow3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/diceRow3">
+            android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/imgDice7"
                 android:layout_width="wrap_content"
@@ -194,13 +211,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnRoll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Roll" />
 
 </RelativeLayout>

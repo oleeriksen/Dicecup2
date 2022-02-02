@@ -14,6 +14,7 @@ public class DiceHistoryManager {
         return historyList;
     }
 
+
     public DiceHistoryManager() {
     }
 
