@@ -1,59 +1,15 @@
 package easv.oe.dicecup2;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
 public class History {
 
     ArrayList<Integer> diceRolls;
-    int diceAmount;
-    String rollInstance;
 
     public History(ArrayList<Integer> diceRolls) {
         this.diceRolls = diceRolls;
-    }
-
-    public History(int dice1) {
-        this.diceAmount = 1;
-        this.rollInstance = String.valueOf(dice1);
-    }
-
-    public History(int dice1, int dice2) {
-        this.diceAmount = 2;
-        this.rollInstance = String.valueOf(dice1) + " - " + String.valueOf(dice2);
-    }
-
-    public History(int dice1, int dice2, int dice3){
-        this.diceAmount = 3;
-        this.rollInstance =  dice1 + " - " + String.valueOf(dice2) + " - " + String.valueOf(dice3);
-    }
-
-    public History(int dice1, int dice2, int dice3, int dice4){
-        this.diceAmount = 4;
-        this.rollInstance =  dice1 + " - " + String.valueOf(dice2) + " - " + String.valueOf(dice3) + " - " + String.valueOf(dice4);
-    }
-
-    public History(int dice1, int dice2, int dice3, int dice4, int dice5){
-        this.diceAmount = 5;
-        this.rollInstance =  dice1 + " - " + String.valueOf(dice2) + " - " + String.valueOf(dice3) + " - " + String.valueOf(dice4) +" - " + String.valueOf(dice5);
-    }
-
-    public History(int dice1, int dice2, int dice3, int dice4, int dice5, int dice6){
-        this.diceAmount = 6;
-        this.rollInstance =  dice1 + " - " + String.valueOf(dice2) + " - " + String.valueOf(dice3) + " - " + String.valueOf(dice4) +" - " + String.valueOf(dice5) + " - " + String.valueOf(dice6);
-    }
-    public History(int dice1, int dice2, int dice3, int dice4, int dice5, int dice6,int dice7){
-        this.diceAmount = 7;
-        this.rollInstance =  dice1 + " - " + String.valueOf(dice2) + " - " + String.valueOf(dice3) + " - " + String.valueOf(dice4) +" - " + String.valueOf(dice5) + " - " + String.valueOf(dice6) + " - " + String.valueOf(dice7);
-    }
-
-    public History(int dice1, int dice2, int dice3, int dice4, int dice5, int dice6,int dice7, int dice8){
-        this.diceAmount = 8;
-        this.rollInstance =  dice1 + " - " + String.valueOf(dice2) + " - " + String.valueOf(dice3) + " - " + String.valueOf(dice4) +" - " + String.valueOf(dice5) + " - " + String.valueOf(dice6) + " - " + String.valueOf(dice7) + " - " + String.valueOf(dice8);
-    }
-
-    public History(int dice1, int dice2, int dice3, int dice4, int dice5, int dice6,int dice7, int dice8, int dice9){
-        this.diceAmount = 9;
-        this.rollInstance =  dice1 + " - " + String.valueOf(dice2) + " - " + String.valueOf(dice3) + " - " + String.valueOf(dice4) +" - " + String.valueOf(dice5) + " - " + String.valueOf(dice6) + " - " + String.valueOf(dice7) + " - " + String.valueOf(dice8) +" - " + String.valueOf(dice9);
     }
 
     public int getDiceAmount(){
@@ -61,18 +17,19 @@ public class History {
     }
 
     public String getRollInstance() {
-        String str = "Amount of Dice: " + getDiceAmount() + "Roll Instance: ";
+        StringBuilder str = new StringBuilder("Amount of Dice: " + getDiceAmount() + " - Roll Instance: ");
 
         for (int i=0; i<diceRolls.size(); i++) {
-            str += diceRolls.get(i);
+            str.append(diceRolls.get(i));
             if(i<diceRolls.size()-1){
-                str+= " - ";
+                str.append(" - ");
             }
 
         }
-        return str;
+        return str.toString();
     }
 
+    @NonNull
     @Override
     public String toString() {
         return getRollInstance();

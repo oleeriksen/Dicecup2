@@ -3,6 +3,9 @@ package easv.oe.dicecup2;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * temporary database (uses a static list to remember dice rolls)
+ */
 public class DiceHistoryManager {
 
     static List<History> historyList = new ArrayList<>();
@@ -12,12 +15,10 @@ public class DiceHistoryManager {
     }
 
     public DiceHistoryManager() {
-
     }
 
     public void addToHistory(History history){
        historyList.add(history);
     }
-
 
 }
