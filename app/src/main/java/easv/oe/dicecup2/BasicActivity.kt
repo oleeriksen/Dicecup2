@@ -1,11 +1,10 @@
 package easv.oe.dicecup2
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 
 open class BasicActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -20,12 +19,12 @@ open class BasicActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.MainMenuWelcome -> {
                 val intent = Intent(this, WelcomeActivity::class.java)
-                startActivity(intent);
+                startActivity(intent)
                 true
             }
             R.id.MainMenuDice -> {
                 val intent = Intent(this, DiceActivity::class.java)
-                startActivity(intent);
+                startActivity(intent)
                 true
             }
             else -> super.onOptionsItemSelected(item)

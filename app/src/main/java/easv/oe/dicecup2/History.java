@@ -1,10 +1,16 @@
 package easv.oe.dicecup2;
 
+import java.util.ArrayList;
+
 public class History {
 
-
+    ArrayList<Integer> diceRolls;
     int diceAmount;
     String rollInstance;
+
+    public History(ArrayList<Integer> diceRolls) {
+        this.diceRolls = diceRolls;
+    }
 
     public History(int dice1) {
         this.diceAmount = 1;
@@ -50,12 +56,25 @@ public class History {
         this.rollInstance =  dice1 + " - " + String.valueOf(dice2) + " - " + String.valueOf(dice3) + " - " + String.valueOf(dice4) +" - " + String.valueOf(dice5) + " - " + String.valueOf(dice6) + " - " + String.valueOf(dice7) + " - " + String.valueOf(dice8) +" - " + String.valueOf(dice9);
     }
 
+    public int getDiceAmount(){
+        return diceRolls.size();
+    }
+
     public String getRollInstance() {
-        return rollInstance;
+        String str = "Amount of Dice: " + getDiceAmount() + "Roll Instance: ";
+
+        for (int i=0; i<diceRolls.size(); i++) {
+            str += diceRolls.get(i);
+            if(i<diceRolls.size()-1){
+                str+= " - ";
+            }
+
+        }
+        return str;
     }
 
     @Override
     public String toString() {
-        return "Dice Amount: " + diceAmount + " __ Roll Instance: " +rollInstance;
+        return getRollInstance();
     }
 }
