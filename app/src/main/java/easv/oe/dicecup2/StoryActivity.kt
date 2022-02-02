@@ -5,7 +5,7 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.*
 import kotlinx.android.synthetic.main.activity_story.*
 
-class StoryActivity : AppCompatActivity() {
+class StoryActivity : BasicActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_story)

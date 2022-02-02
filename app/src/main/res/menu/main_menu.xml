@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Welcome" />
-    <item android:title="Dice" />
-    <item android:title="Calculator" />
+    <item
+        android:id="@+id/MainMenuWelcome"
+        android:title="Welcome" />
+    <item
+        android:id="@+id/MainMenuDice"
+        android:title="Dice" />
+    <item
+        android:id="@+id/MainMenuCalculator"
+        android:title="Calculator" />
 </menu>

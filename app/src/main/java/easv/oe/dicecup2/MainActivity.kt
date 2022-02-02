@@ -7,10 +7,11 @@ import android.util.Log
 import android.view.View
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BasicActivity() {
 
     private val TAG: String = "xyz"
     lateinit var diceHistory: DiceHistoryManager;
@@ -25,11 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     private val mRandomGenerator = Random()
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.main_menu, menu)
-        return true
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
