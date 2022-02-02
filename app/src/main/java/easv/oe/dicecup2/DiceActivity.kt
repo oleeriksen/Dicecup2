@@ -3,15 +3,19 @@ package easv.oe.dicecup2
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_dice.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class DiceActivity : BasicActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dice)
+
+        allDices = listOf(imgDice1, imgDice2, imgDice3, imgDice4, imgDice5, imgDice6, imgDice7, imgDice8, imgDice9);
 
         btnRoll.setOnClickListener { v -> onClickRoll() }
         btnStory.setOnClickListener { v-> onCLickStory() }
@@ -20,7 +24,8 @@ class DiceActivity : BasicActivity() {
             override fun onProgressChanged(seek: SeekBar,
                                            progress: Int, fromUser: Boolean) {
                 diceAmount = seek.progress;
-                tvDiceCount.text = seek.progress.toString();
+                tvDiceCount.text = diceAmount.toString();
+                updateDiceVisibility()
             }
 
             override fun onStartTrackingTouch(seek: SeekBar) {
@@ -39,7 +44,7 @@ class DiceActivity : BasicActivity() {
     private var diceAmount: Int = 2;
     private val TAG: String = "xyz"
     lateinit var diceHistory: DiceHistoryManager;
-    private val allDices: List<ImageView> = listOf(imgDice1, imgDice2, imgDice3, imgDice4, imgDice5, imgDice6, imgDice7, imgDice8, imgDice9)
+    lateinit var allDices: List<ImageView>
 
 
     // mapping from 1..6 to drawables, the first index is unused
@@ -68,10 +73,7 @@ class DiceActivity : BasicActivity() {
         // set dices
 
         val dices = arrayOf(e1, e2, e3);
-
-
-        logDiceRoll(dices);
-        updateDicesWith(dices)
+        updateDices()
         Log.d(TAG, "Roll")
     }
 
@@ -79,7 +81,7 @@ class DiceActivity : BasicActivity() {
         return mRandomGenerator.nextInt(6) + 1;
     }
 
-    private fun logDiceRoll(dices: Array<Int>){
+    private fun logDiceRoll(dices: ArrayList<Int>){
         when(dices.size){
             1->{
                 diceHistory.addToHistory(History(dices[0]))
@@ -102,80 +104,34 @@ class DiceActivity : BasicActivity() {
         startActivity(intent);
     }
 
-    
-
-    private fun updateDicesWith(dices: Array<Int>) {
-
-
-
-        when(dices.size){
-            1->{
-                imgDice1.setImageResource(diceId[giveRandomNum()])
+    private fun updateDiceVisibility(){
+        var i: Int = 1
+        for(dice in allDices){
+            if(i <= diceAmount){
+                dice.visibility = View.VISIBLE;
             }
-            2->{
-                imgDice1.setImageResource( diceId[giveRandomNum()] )
-                imgDice2.setImageResource( diceId[giveRandomNum()] )
+            else{
+                dice.visibility = View.INVISIBLE;
             }
-            3->{
-                imgDice1.setImageResource( diceId[giveRandomNum()] )
-                imgDice2.setImageResource( diceId[giveRandomNum()] )
-                imgDice3.setImageResource( diceId[giveRandomNum()] )
-            }
-            4-> {
-                imgDice1.setImageResource(diceId[giveRandomNum()])
-                imgDice2.setImageResource(diceId[giveRandomNum()])
-                imgDice3.setImageResource(diceId[giveRandomNum()])
-                imgDice4.setImageResource(diceId[giveRandomNum()])
-            }
-            5-> {
-                imgDice1.setImageResource(diceId[giveRandomNum()])
-                imgDice2.setImageResource(diceId[giveRandomNum()])
-                imgDice3.setImageResource(diceId[giveRandomNum()])
-                imgDice4.setImageResource(diceId[giveRandomNum()])
-                imgDice5.setImageResource(diceId[giveRandomNum()])
-            }
-            6-> {
-                imgDice1.setImageResource(diceId[giveRandomNum()])
-                imgDice2.setImageResource(diceId[giveRandomNum()])
-                imgDice3.setImageResource(diceId[giveRandomNum()])
-                imgDice4.setImageResource(diceId[giveRandomNum()])
-                imgDice5.setImageResource(diceId[giveRandomNum()])
-                imgDice6.setImageResource(diceId[giveRandomNum()])
-            }
-            7-> {
-                imgDice1.setImageResource(diceId[giveRandomNum()])
-                imgDice2.setImageResource(diceId[giveRandomNum()])
-                imgDice3.setImageResource(diceId[giveRandomNum()])
-                imgDice4.setImageResource(diceId[giveRandomNum()])
-                imgDice5.setImageResource(diceId[giveRandomNum()])
-                imgDice6.setImageResource(diceId[giveRandomNum()])
-                imgDice7.setImageResource(diceId[giveRandomNum()])
-            }
-            8-> {
-                imgDice1.setImageResource(diceId[giveRandomNum()])
-                imgDice2.setImageResource(diceId[giveRandomNum()])
-                imgDice3.setImageResource(diceId[giveRandomNum()])
-                imgDice4.setImageResource(diceId[giveRandomNum()])
-                imgDice5.setImageResource(diceId[giveRandomNum()])
-                imgDice6.setImageResource(diceId[giveRandomNum()])
-                imgDice7.setImageResource(diceId[giveRandomNum()])
-                imgDice8.setImageResource(diceId[giveRandomNum()])
-            }
-            9-> {
-                imgDice1.setImageResource(diceId[giveRandomNum()])
-                imgDice2.setImageResource(diceId[giveRandomNum()])
-                imgDice3.setImageResource(diceId[giveRandomNum()])
-                imgDice4.setImageResource(diceId[giveRandomNum()])
-                imgDice5.setImageResource(diceId[giveRandomNum()])
-                imgDice6.setImageResource(diceId[giveRandomNum()])
-                imgDice7.setImageResource(diceId[giveRandomNum()])
-                imgDice8.setImageResource(diceId[giveRandomNum()])
-                imgDice9.setImageResource(diceId[giveRandomNum()])
-            }
-            else->{
-
-            }
+            i += 1
         }
+    }
 
+    private fun updateDices() {
+        var diceRolls = ArrayList<Int>()
+
+        var i: Int = 1
+        for(dice in allDices){
+            if(i <= diceAmount){
+                val ranNum = giveRandomNum()
+                dice.visibility = View.VISIBLE;
+                dice.setImageResource(diceId[ranNum])
+                diceRolls.add(ranNum);
+            }
+            else{
+                dice.visibility = View.INVISIBLE;
+            }
+            i += 1
+        }
     }
 }
