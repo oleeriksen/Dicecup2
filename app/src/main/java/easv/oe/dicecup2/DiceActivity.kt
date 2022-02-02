@@ -75,6 +75,10 @@ class DiceActivity : BasicActivity() {
         Log.d(TAG, "Roll")
     }
 
+    private fun giveRandomNum(): Int {
+        return mRandomGenerator.nextInt(6) + 1;
+    }
+
     private fun logDiceRoll(dices: Array<Int>){
         when(dices.size){
             1->{
@@ -106,67 +110,67 @@ class DiceActivity : BasicActivity() {
 
         when(dices.size){
             1->{
-                imgDice1.setImageResource(diceId[dices[0]])
+                imgDice1.setImageResource(diceId[giveRandomNum()])
             }
             2->{
-                imgDice1.setImageResource( diceId[dices[0]] )
-                imgDice2.setImageResource( diceId[dices[1]] )
+                imgDice1.setImageResource( diceId[giveRandomNum()] )
+                imgDice2.setImageResource( diceId[giveRandomNum()] )
             }
             3->{
-                imgDice1.setImageResource( diceId[dices[0]] )
-                imgDice2.setImageResource( diceId[dices[1]] )
-                imgDice3.setImageResource( diceId[dices[2]] )
+                imgDice1.setImageResource( diceId[giveRandomNum()] )
+                imgDice2.setImageResource( diceId[giveRandomNum()] )
+                imgDice3.setImageResource( diceId[giveRandomNum()] )
             }
             4-> {
-                imgDice1.setImageResource(diceId[dices[0]])
-                imgDice2.setImageResource(diceId[dices[1]])
-                imgDice3.setImageResource(diceId[dices[2]])
-                imgDice4.setImageResource(diceId[dices[3]])
+                imgDice1.setImageResource(diceId[giveRandomNum()])
+                imgDice2.setImageResource(diceId[giveRandomNum()])
+                imgDice3.setImageResource(diceId[giveRandomNum()])
+                imgDice4.setImageResource(diceId[giveRandomNum()])
             }
             5-> {
-                imgDice1.setImageResource(diceId[dices[0]])
-                imgDice2.setImageResource(diceId[dices[1]])
-                imgDice3.setImageResource(diceId[dices[2]])
-                imgDice4.setImageResource(diceId[dices[3]])
-                imgDice5.setImageResource(diceId[dices[4]])
+                imgDice1.setImageResource(diceId[giveRandomNum()])
+                imgDice2.setImageResource(diceId[giveRandomNum()])
+                imgDice3.setImageResource(diceId[giveRandomNum()])
+                imgDice4.setImageResource(diceId[giveRandomNum()])
+                imgDice5.setImageResource(diceId[giveRandomNum()])
             }
             6-> {
-                imgDice1.setImageResource(diceId[dices[0]])
-                imgDice2.setImageResource(diceId[dices[1]])
-                imgDice3.setImageResource(diceId[dices[2]])
-                imgDice4.setImageResource(diceId[dices[3]])
-                imgDice5.setImageResource(diceId[dices[4]])
-                imgDice6.setImageResource(diceId[dices[5]])
+                imgDice1.setImageResource(diceId[giveRandomNum()])
+                imgDice2.setImageResource(diceId[giveRandomNum()])
+                imgDice3.setImageResource(diceId[giveRandomNum()])
+                imgDice4.setImageResource(diceId[giveRandomNum()])
+                imgDice5.setImageResource(diceId[giveRandomNum()])
+                imgDice6.setImageResource(diceId[giveRandomNum()])
             }
             7-> {
-                imgDice1.setImageResource(diceId[dices[0]])
-                imgDice2.setImageResource(diceId[dices[1]])
-                imgDice3.setImageResource(diceId[dices[2]])
-                imgDice4.setImageResource(diceId[dices[3]])
-                imgDice5.setImageResource(diceId[dices[4]])
-                imgDice6.setImageResource(diceId[dices[5]])
-                imgDice7.setImageResource(diceId[dices[6]])
+                imgDice1.setImageResource(diceId[giveRandomNum()])
+                imgDice2.setImageResource(diceId[giveRandomNum()])
+                imgDice3.setImageResource(diceId[giveRandomNum()])
+                imgDice4.setImageResource(diceId[giveRandomNum()])
+                imgDice5.setImageResource(diceId[giveRandomNum()])
+                imgDice6.setImageResource(diceId[giveRandomNum()])
+                imgDice7.setImageResource(diceId[giveRandomNum()])
             }
             8-> {
-                imgDice1.setImageResource(diceId[dices[0]])
-                imgDice2.setImageResource(diceId[dices[1]])
-                imgDice3.setImageResource(diceId[dices[2]])
-                imgDice4.setImageResource(diceId[dices[3]])
-                imgDice5.setImageResource(diceId[dices[4]])
-                imgDice6.setImageResource(diceId[dices[5]])
-                imgDice7.setImageResource(diceId[dices[6]])
-                imgDice8.setImageResource(diceId[dices[7]])
+                imgDice1.setImageResource(diceId[giveRandomNum()])
+                imgDice2.setImageResource(diceId[giveRandomNum()])
+                imgDice3.setImageResource(diceId[giveRandomNum()])
+                imgDice4.setImageResource(diceId[giveRandomNum()])
+                imgDice5.setImageResource(diceId[giveRandomNum()])
+                imgDice6.setImageResource(diceId[giveRandomNum()])
+                imgDice7.setImageResource(diceId[giveRandomNum()])
+                imgDice8.setImageResource(diceId[giveRandomNum()])
             }
             9-> {
-                imgDice1.setImageResource(diceId[dices[0]])
-                imgDice2.setImageResource(diceId[dices[1]])
-                imgDice3.setImageResource(diceId[dices[2]])
-                imgDice4.setImageResource(diceId[dices[3]])
-                imgDice5.setImageResource(diceId[dices[4]])
-                imgDice6.setImageResource(diceId[dices[5]])
-                imgDice7.setImageResource(diceId[dices[6]])
-                imgDice8.setImageResource(diceId[dices[7]])
-                imgDice9.setImageResource(diceId[dices[8]])
+                imgDice1.setImageResource(diceId[giveRandomNum()])
+                imgDice2.setImageResource(diceId[giveRandomNum()])
+                imgDice3.setImageResource(diceId[giveRandomNum()])
+                imgDice4.setImageResource(diceId[giveRandomNum()])
+                imgDice5.setImageResource(diceId[giveRandomNum()])
+                imgDice6.setImageResource(diceId[giveRandomNum()])
+                imgDice7.setImageResource(diceId[giveRandomNum()])
+                imgDice8.setImageResource(diceId[giveRandomNum()])
+                imgDice9.setImageResource(diceId[giveRandomNum()])
             }
             else->{
 
