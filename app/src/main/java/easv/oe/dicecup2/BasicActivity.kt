@@ -13,13 +13,13 @@ import androidx.appcompat.app.AppCompatActivity
 open class BasicActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        SetupMainMenu(menu)
+        setupMainMenu(menu)
         return true
     }
 
     //region MainMenu
 
-    private fun SetupMainMenu(menu: Menu) {
+    private fun setupMainMenu(menu: Menu) {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.main_menu, menu)
     }
