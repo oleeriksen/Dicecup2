@@ -3,6 +3,7 @@ package easv.oe.dicecup2
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_dice.*
 import java.util.*
@@ -19,6 +20,7 @@ class DiceActivity : BasicActivity() {
             override fun onProgressChanged(seek: SeekBar,
                                            progress: Int, fromUser: Boolean) {
                 diceAmount = seek.progress;
+                tvDiceCount.text = seek.progress.toString();
             }
 
             override fun onStartTrackingTouch(seek: SeekBar) {
@@ -37,6 +39,7 @@ class DiceActivity : BasicActivity() {
     private var diceAmount: Int = 2;
     private val TAG: String = "xyz"
     lateinit var diceHistory: DiceHistoryManager;
+    private val allDices: List<ImageView> = listOf(imgDice1, imgDice2, imgDice3, imgDice4, imgDice5, imgDice6, imgDice7, imgDice8, imgDice9)
 
 
     // mapping from 1..6 to drawables, the first index is unused
@@ -50,6 +53,8 @@ class DiceActivity : BasicActivity() {
     private val mRandomGenerator = Random()
 
     private fun onClickRoll(){
+
+
         val e1 = mRandomGenerator.nextInt(6) + 1
         val e2 = mRandomGenerator.nextInt(6) + 1
         val e3 = mRandomGenerator.nextInt(6) + 1
@@ -96,6 +101,8 @@ class DiceActivity : BasicActivity() {
     
 
     private fun updateDicesWith(dices: Array<Int>) {
+
+
 
         when(dices.size){
             1->{
