@@ -16,6 +16,10 @@ public class History {
         return diceRolls.size();
     }
 
+    public ArrayList<Integer> getRollArraylist(){
+        return diceRolls;
+    }
+
     public String getRollInstance() {
         StringBuilder str = new StringBuilder("Amount of Dice: " + getDiceAmount() + " - Roll Instance: ");
 
