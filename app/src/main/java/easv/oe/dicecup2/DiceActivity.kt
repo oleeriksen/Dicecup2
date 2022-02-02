@@ -12,7 +12,25 @@ import kotlin.collections.ArrayList
 
 class DiceActivity : BasicActivity() {
 
-    private fun diceSeek(): SeekBar.OnSeekBarChangeListener{
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_dice)
+        Log.d(TAG, "OnCreate")
+
+        diceHistory = DiceHistoryManager()
+        allDices = listOf(imgDice1, imgDice2, imgDice3, imgDice4, imgDice5, imgDice6, imgDice7, imgDice8, imgDice9)
+
+        addListeners()
+    }
+
+    private fun addListeners() {
+        btnRoll.setOnClickListener { onClickRoll() }
+        btnStory.setOnClickListener { onCLickStory() }
+        seekBarDiceAmount.setOnSeekBarChangeListener(seekbarDiceAmount_SetupListener())
+    }
+
+    private fun seekbarDiceAmount_SetupListener(): SeekBar.OnSeekBarChangeListener{
         return object :
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seek: SeekBar,
@@ -30,20 +48,6 @@ class DiceActivity : BasicActivity() {
                 // write custom code for progress is stopped
             }
         }
-    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dice)
-
-        diceHistory = DiceHistoryManager()
-        allDices = listOf(imgDice1, imgDice2, imgDice3, imgDice4, imgDice5, imgDice6, imgDice7, imgDice8, imgDice9)
-
-        btnRoll.setOnClickListener { onClickRoll() }
-        btnStory.setOnClickListener { onCLickStory() }
-        seekBarDiceAmount.setOnSeekBarChangeListener( diceSeek())
-        Log.d(TAG, "OnCreate")
     }
 
     private var diceAmount: Int = 2
