@@ -3,11 +3,14 @@ package easv.oe.dicecup2;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * stores different greetings
+ */
 public class GreetingsManager {
 
-    private Utils util = new Utils();
-    private List<String> DanishGreetings = new ArrayList<>();
-    private List<String> EnglishGreetings = new ArrayList<>();
+    private final Utils util = new Utils();
+    private final List<String> DanishGreetings = new ArrayList<>();
+    private final List<String> EnglishGreetings = new ArrayList<>();
 
     public GreetingsManager() {
         initGreetings();

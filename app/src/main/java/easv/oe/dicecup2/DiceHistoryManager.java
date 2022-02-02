@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * temporary database (uses a static list to remember dice rolls)
+ * stores dice rolls
  */
 public class DiceHistoryManager {
 
