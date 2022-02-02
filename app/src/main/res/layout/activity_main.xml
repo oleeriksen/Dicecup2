@@ -3,6 +3,7 @@
 
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,4 +11,57 @@
     android:paddingRight="16dp"
     tools:context=".MainActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="395dp"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btnWelcome"
+            android:layout_width="314dp"
+            android:layout_height="83dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="146dp"
+            android:layout_marginEnd="32dp"
+            android:text="Welcome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnDices"
+            android:layout_width="314dp"
+            android:layout_height="83dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="33dp"
+            android:text="Dices"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnWelcome" />
+
+        <Button
+            android:id="@+id/btnCalculator"
+            android:layout_width="314dp"
+            android:layout_height="83dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="33dp"
+            android:text="Calculator"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnDices" />
+
+        <TextView
+            android:id="@+id/tvFirstApp"
+            android:layout_width="313dp"
+            android:layout_height="111dp"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="33dp"
+            android:text="First App"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

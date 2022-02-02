@@ -1,6 +1,8 @@
 package easv.oe.dicecup2
 
+import android.content.Intent
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BasicActivity() {
 
@@ -8,6 +10,21 @@ class MainActivity : BasicActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        btnWelcome.setOnClickListener{onClickWelcome()}
+        btnDices.setOnClickListener{onClickDices()}
     }
+
+    private fun onClickWelcome()  {
+        val intent = Intent(this, WelcomeActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun onClickDices(){
+        val intent = Intent(this, DiceActivity::class.java)
+        startActivity(intent)
+    }
+
+
 
 }
