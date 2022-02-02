@@ -27,7 +27,6 @@ class DiceActivity : BasicActivity() {
         R.drawable.dice5,
         R.drawable.dice6)
 
-    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dice)
