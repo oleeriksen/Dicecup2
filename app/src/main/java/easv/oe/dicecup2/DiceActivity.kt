@@ -12,25 +12,43 @@ import kotlin.collections.ArrayList
 
 class DiceActivity : BasicActivity() {
 
+    private var diceAmount: Int = 2
+    private val TAG: String = "xyz"
+    private lateinit var diceHistory: DiceHistoryManager
+    private lateinit var utils: Utils
+    private lateinit var allDices: List<ImageView>
 
+
+    // mapping from 1..6 to drawables, the first index is unused
+    private val diceId = intArrayOf(0, R.drawable.dice1,
+        R.drawable.dice2,
+        R.drawable.dice3,
+        R.drawable.dice4,
+        R.drawable.dice5,
+        R.drawable.dice6)
+
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dice)
         Log.d(TAG, "OnCreate")
 
+        utils = Utils()
         diceHistory = DiceHistoryManager()
         allDices = listOf(imgDice1, imgDice2, imgDice3, imgDice4, imgDice5, imgDice6, imgDice7, imgDice8, imgDice9)
 
         addListeners()
     }
 
+    //region Setup Listeners
+
     private fun addListeners() {
         btnRoll.setOnClickListener { onClickRoll() }
         btnStory.setOnClickListener { onCLickStory() }
-        seekBarDiceAmount.setOnSeekBarChangeListener(seekbarDiceAmount_SetupListener())
+        seekBarDiceAmount.setOnSeekBarChangeListener(diceAmountSetupListener())
     }
 
-    private fun seekbarDiceAmount_SetupListener(): SeekBar.OnSeekBarChangeListener{
+    private fun diceAmountSetupListener(): SeekBar.OnSeekBarChangeListener{
         return object :
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seek: SeekBar,
@@ -50,37 +68,23 @@ class DiceActivity : BasicActivity() {
         }
     }
 
-    private var diceAmount: Int = 2
-    private val TAG: String = "xyz"
-    private lateinit var diceHistory: DiceHistoryManager
-    private lateinit var allDices: List<ImageView>
+    //endregion
 
-
-    // mapping from 1..6 to drawables, the first index is unused
-    private val diceId = intArrayOf(0, R.drawable.dice1,
-        R.drawable.dice2,
-        R.drawable.dice3,
-        R.drawable.dice4,
-        R.drawable.dice5,
-        R.drawable.dice6)
-
-    private val mRandomGenerator = Random()
-
+    //region OnClick Methods
     private fun onClickRoll(){
         // set dices
         updateDices()
         Log.d(TAG, "Roll")
     }
 
-    private fun giveRandomNum(): Int {
-        return mRandomGenerator.nextInt(6) + 1
-    }
-
-
     private fun onCLickStory(){
         val intent = Intent(this, StoryActivity::class.java)
         startActivity(intent)
     }
+
+    //endregion
+
+    //region dice methods
 
     private fun updateDiceVisibility(){
         var i = 1
@@ -101,7 +105,7 @@ class DiceActivity : BasicActivity() {
         var i = 1
         for(dice in allDices){
             if(dice.visibility == View.VISIBLE) {
-                val ranNum = giveRandomNum()
+                val ranNum = utils.getRandomInt(1, 6)
                 dice.setImageResource(diceId[ranNum])
                 diceRolls.add(ranNum)
             }
@@ -110,4 +114,6 @@ class DiceActivity : BasicActivity() {
 
         diceHistory.addToHistory(History(diceRolls))
     }
+
+    //endregion
 }
