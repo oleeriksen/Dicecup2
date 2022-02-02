@@ -19,6 +19,7 @@ class DiceActivity : BasicActivity() {
             override fun onProgressChanged(seek: SeekBar,
                                            progress: Int, fromUser: Boolean) {
                 diceAmount = seek.progress;
+                tvDiceCount.text = seek.progress.toString();
             }
 
             override fun onStartTrackingTouch(seek: SeekBar) {
