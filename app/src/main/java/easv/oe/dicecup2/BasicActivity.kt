@@ -24,7 +24,7 @@ open class BasicActivity : AppCompatActivity() {
                 true
             }
             R.id.MainMenuDice -> {
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, DiceActivity::class.java)
                 startActivity(intent);
                 true
             }
