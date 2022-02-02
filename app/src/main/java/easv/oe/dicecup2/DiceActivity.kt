@@ -1,10 +1,10 @@
 package easv.oe.dicecup2
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import kotlinx.android.synthetic.main.activity_main.*
+import android.widget.SeekBar
+import kotlinx.android.synthetic.main.activity_dice.*
 import java.util.*
 
 class DiceActivity : BasicActivity() {
@@ -14,14 +14,30 @@ class DiceActivity : BasicActivity() {
 
         btnRoll.setOnClickListener { v -> onClickRoll() }
         btnStory.setOnClickListener { v-> onCLickStory() }
+        seekBarDiceAmount.setOnSeekBarChangeListener(object :
+        SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seek: SeekBar,
+                                           progress: Int, fromUser: Boolean) {
+                diceAmount = seek.progress;
+            }
+
+            override fun onStartTrackingTouch(seek: SeekBar) {
+                // write custom code for progress is started
+            }
+
+            override fun onStopTrackingTouch(seek: SeekBar) {
+                // write custom code for progress is stopped
+            }
+        })
         Log.d(TAG, "OnCreate")
 
         diceHistory = DiceHistoryManager();
     }
 
-
+    private var diceAmount: Int = 2;
     private val TAG: String = "xyz"
     lateinit var diceHistory: DiceHistoryManager;
+
 
     // mapping from 1..6 to drawables, the first index is unused
     private val diceId = intArrayOf(0, R.drawable.dice1,
@@ -40,9 +56,29 @@ class DiceActivity : BasicActivity() {
 
         // set dices
 
-        diceHistory.addToHistory(History(e1, e2))
-        updateDicesWith(e1, e2, e3)
+        val dices = arrayOf(e1, e2, e3);
+
+
+        logDiceRoll(dices);
+        updateDicesWith(dices)
         Log.d(TAG, "Roll")
+    }
+
+    private fun logDiceRoll(dices: Array<Int>){
+        when(dices.size){
+            1->{
+                diceHistory.addToHistory(History(dices[0]))
+            }
+            2->{
+                diceHistory.addToHistory(History(dices[0], dices[1]))
+            }
+            3->{
+                diceHistory.addToHistory(History(dices[0], dices[1], dices[2]))
+            }
+            else->{
+
+            }
+        }
     }
 
 
@@ -51,9 +87,18 @@ class DiceActivity : BasicActivity() {
         startActivity(intent);
     }
 
-    private fun updateDicesWith(d1: Int, d2: Int, d3: Int) {
-        imgDice1.setImageResource( diceId[d1] )
-        imgDice2.setImageResource( diceId[d2] )
-        imgDice3.setImageResource( diceId[d3] )
+    private fun updateDicesWith(dices: Array<Int>) {
+
+        when(dices.size){
+            3->{
+                imgDice1.setImageResource( diceId[dices[0]] )
+                imgDice2.setImageResource( diceId[dices[1]] )
+                imgDice3.setImageResource( diceId[dices[2]] )
+            }
+            else->{
+
+            }
+        }
+
     }
 }

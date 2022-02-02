@@ -11,6 +11,29 @@
     tools:context=".DiceActivity">
 
 
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="391dp"
+        android:layout_height="88dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dicecup - basic version"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <SeekBar
+            android:id="@+id/seekBarDiceAmount"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:max="9"
+            android:min="1"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnStory"
@@ -20,22 +43,12 @@
         android:layout_marginBottom="4dp"
         android:text="Story" />
 
-    <TextView
-        android:id="@+id/tvHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Dicecup - basic version"
-        android:textSize="25dp"
-        android:textStyle="bold" />
-
     <LinearLayout
         android:id="@+id/layoutDices"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvHeader"
-        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/layout1"
+        android:layout_marginTop="128dp"
         android:background="@color/board"
         android:orientation="horizontal">
 

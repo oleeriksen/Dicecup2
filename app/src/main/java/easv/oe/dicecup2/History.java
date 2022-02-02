@@ -56,6 +56,6 @@ public class History {
 
     @Override
     public String toString() {
-        return rollInstance;
+        return "Dice Amount: " + diceAmount + " __ Roll Instance: " +rollInstance;
     }
 }
