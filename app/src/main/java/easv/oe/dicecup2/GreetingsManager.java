@@ -24,6 +24,8 @@ public class GreetingsManager {
         EnglishGreetings.add("Hi");
     }
 
+    //region Greeting getters
+
     public String getDanishGreeting(){
         return getGreeting(DanishGreetings);
     }
@@ -35,4 +37,6 @@ public class GreetingsManager {
     private String getGreeting(List<String> GreetingsList){
         return GreetingsList.get(util.getRandomInt(0, GreetingsList.size()-1));
     }
+
+    //endregion
 }

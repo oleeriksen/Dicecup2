@@ -12,6 +12,8 @@ import kotlin.collections.ArrayList
 
 class DiceActivity : BasicActivity() {
 
+    //region Vars and vals
+
     private var diceAmount: Int = 2
     private val TAG: String = "xyz"
     private lateinit var diceHistory: DiceHistoryManager
@@ -26,6 +28,8 @@ class DiceActivity : BasicActivity() {
         R.drawable.dice4,
         R.drawable.dice5,
         R.drawable.dice6)
+
+    //endregion
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
