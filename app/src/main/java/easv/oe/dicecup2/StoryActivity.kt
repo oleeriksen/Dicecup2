@@ -27,31 +27,24 @@ class StoryActivity : BasicActivity() {
             addCustomUI(history)
         }
 
-        back.setOnClickListener{ back()}
+        back.setOnClickListener{ onClickBack()}
 
-    }
-
-    private fun back() {
-        finish()
     }
 
     @SuppressLint("ResourceAsColor")
-    fun addCustomUI(history: History){
+    fun addCustomUI(rollLog: DiceRollLog){
         val view = layoutInflater.inflate(R.layout.roll, null)
-
-        val diceId = diceManager.diceImages
-
         val allDices = listOf(view.dice1, view.dice2, view.dice3, view.dice4, view.dice5, view.dice6, view.dice7, view.dice8, view.dice9)
 
-        view.txtRollText.setText("Amount of rolled dice: " + history.diceAmount)
+        view.txtRollText.setText(rollLog.diceAmountString)
         view.txtRollText.setTypeface(null, Typeface.BOLD)
         view.txtRollText.setTextColor(Color.WHITE)
 
-
+        //For each dice, if the dice has an index lower than the total amount of dices in the current diceRollLog, the dice will be shown with an image;
         for((i, dice) in allDices.withIndex()){
-            if(i<history.diceAmount){
+            if(i<rollLog.diceAmount){
                 dice.visibility = View.VISIBLE
-                allDices[i].setImageResource(diceId[history.diceRolls[i]])
+                allDices[i].setImageResource(diceManager.diceImages[rollLog.dices[i]])
             }
             else{
                 dice.visibility = View.GONE
@@ -60,4 +53,12 @@ class StoryActivity : BasicActivity() {
 
         container.addView(view)
     }
+
+    //region onClick methods
+
+    private fun onClickBack() {
+        finish()
+    }
+
+    //endregion
 }

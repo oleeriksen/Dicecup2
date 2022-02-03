@@ -4,28 +4,32 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
-public class History {
+public class DiceRollLog {
 
-    ArrayList<Integer> diceRolls;
+    private ArrayList<Integer> dices;
 
-    public History(ArrayList<Integer> diceRolls) {
-        this.diceRolls = diceRolls;
+    public DiceRollLog(ArrayList<Integer> dices) {
+        this.dices = dices;
     }
 
     public int getDiceAmount(){
-        return diceRolls.size();
+        return dices.size();
     }
 
-    public ArrayList<Integer> getRollArraylist(){
-        return diceRolls;
+    public String getDiceAmountString(){
+        return "Amount of rolled dice: " + getDiceAmount();
+    }
+
+    public ArrayList<Integer> getDices() {
+        return dices;
     }
 
     public String getRollInstance() {
         StringBuilder str = new StringBuilder("Amount of Dice: " + getDiceAmount() + " - Roll Instance: ");
 
-        for (int i=0; i<diceRolls.size(); i++) {
-            str.append(diceRolls.get(i));
-            if(i<diceRolls.size()-1){
+        for (int i = 0; i< dices.size(); i++) {
+            str.append(dices.get(i));
+            if(i< dices.size()-1){
                 str.append(" - ");
             }
 

@@ -8,9 +8,9 @@ import java.util.List;
  */
 public class DiceHistoryManager {
 
-    static List<History> historyList = new ArrayList<>();
+    static List<DiceRollLog> historyList = new ArrayList<>();
 
-    public List<History> getHistoryList() {
+    public List<DiceRollLog> getHistoryList() {
         return historyList;
     }
 
@@ -18,8 +18,9 @@ public class DiceHistoryManager {
     public DiceHistoryManager() {
     }
 
-    public void addToHistory(History history){
+    public void addToHistory(DiceRollLog history){
        historyList.add(history);
     }
+
 
 }

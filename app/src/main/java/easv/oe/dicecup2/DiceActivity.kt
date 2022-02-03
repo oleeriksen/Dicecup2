@@ -8,15 +8,15 @@ import android.widget.ImageView
 import android.widget.SeekBar
 import easv.oe.dicecup2.DiceManagers.DiceManager
 import kotlinx.android.synthetic.main.activity_dice.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 class DiceActivity : BasicActivity() {
 
     //region Vars and vals
 
-    private var diceAmount: Int = 2
+
     private val TAG: String = "xyz"
+    private var currentDiceAmount: Int = 2
     private lateinit var diceHistory: DiceHistoryManager
     private lateinit var diceManager: DiceManager
     private lateinit var utils: Utils
@@ -35,6 +35,8 @@ class DiceActivity : BasicActivity() {
         diceManager = DiceManager()
         allDices = listOf(imgDice1, imgDice2, imgDice3, imgDice4, imgDice5, imgDice6, imgDice7, imgDice8, imgDice9)
 
+        updateDiceVisibility(currentDiceAmount)
+
         addListeners()
     }
 
@@ -51,9 +53,7 @@ class DiceActivity : BasicActivity() {
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seek: SeekBar,
                                            progress: Int, fromUser: Boolean) {
-                diceAmount = seek.progress
-                tvDiceCount.text = diceAmount.toString()
-                updateDiceVisibility()
+                updateDiceVisibility(seek.progress)
             }
 
             override fun onStartTrackingTouch(seek: SeekBar) {
@@ -84,7 +84,13 @@ class DiceActivity : BasicActivity() {
 
     //region dice methods
 
-    private fun updateDiceVisibility(){
+    private fun updateDiceVisibility(diceAmount:Int){
+
+        currentDiceAmount = diceAmount
+        tvDiceCount.text = currentDiceAmount.toString()
+        seekBarDiceAmount.progress = diceAmount
+
+
         var i = 1
         for(dice in allDices){
             if(i <= diceAmount){
@@ -110,7 +116,7 @@ class DiceActivity : BasicActivity() {
             i += 1
         }
 
-        diceHistory.addToHistory(History(diceRolls))
+        diceHistory.addToHistory(DiceRollLog(diceRolls))
     }
 
     //endregion
