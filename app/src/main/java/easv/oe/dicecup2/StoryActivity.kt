@@ -5,12 +5,8 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import easv.oe.dicecup2.DiceManagers.DiceManager
-import kotlinx.android.synthetic.main.activity_dice.*
 import kotlinx.android.synthetic.main.activity_story.*
-import kotlinx.android.synthetic.main.roll.*
 import kotlinx.android.synthetic.main.roll.view.*
 
 class StoryActivity : BasicActivity() {
@@ -30,7 +26,7 @@ class StoryActivity : BasicActivity() {
         val diceHistoryManager = DiceHistoryManager()
         for (history in diceHistoryManager.historyList){
                 historyString += history.rollArraylist.toString() + "\n"
-            addCustomUI(history.diceAmount, history.diceRolls)
+            addCustomUI(history)
         }
 
         back.setOnClickListener{ back()}
@@ -42,38 +38,26 @@ class StoryActivity : BasicActivity() {
     }
 
     @SuppressLint("ResourceAsColor")
-    fun addCustomUI(amount: Int, array: ArrayList<Int>){
-        var view = layoutInflater.inflate(R.layout.roll, null)
-
-        var d1 = view.findViewById<ImageView>(R.id.dice1)
-        var d2 = view.findViewById<ImageView>(R.id.dice2)
-        var d3 = view.findViewById<ImageView>(R.id.dice3)
-        var d4 = view.findViewById<ImageView>(R.id.dice4)
-        var d5 = view.findViewById<ImageView>(R.id.dice5)
-        var d6 = view.findViewById<ImageView>(R.id.dice6)
-        var d7 = view.findViewById<ImageView>(R.id.dice7)
-        var d8 = view.findViewById<ImageView>(R.id.dice8)
-        var d9 = view.findViewById<ImageView>(R.id.dice9)
+    fun addCustomUI(history: History){
+        val view = layoutInflater.inflate(R.layout.roll, null)
 
         val diceId = diceManager.diceImages
 
         val allDices = listOf(view.dice1, view.dice2, view.dice3, view.dice4, view.dice5, view.dice6, view.dice7, view.dice8, view.dice9)
 
-        view.txtRollText.setText("Amount of rolled dice: " + amount)
+        view.txtRollText.setText("Amount of rolled dice: " + history.diceAmount)
         view.txtRollText.setTypeface(null, Typeface.BOLD)
         view.txtRollText.setTextColor(Color.WHITE)
 
 
-        var i = 0
-        for(dice in allDices){
-            if(i<amount){
+        for((i, dice) in allDices.withIndex()){
+            if(i<history.diceAmount){
                 dice.visibility = View.VISIBLE
-                allDices[i].setImageResource(diceId[array[i]])
+                allDices[i].setImageResource(diceId[history.diceRolls[i]])
             }
             else{
                 dice.visibility = View.GONE
             }
-            i++
         }
 
         container.addView(view)
