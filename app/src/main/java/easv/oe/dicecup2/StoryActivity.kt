@@ -20,12 +20,10 @@ class StoryActivity : BasicActivity() {
         setContentView(R.layout.activity_story)
 
         diceManager = DiceManager()
-        var historyString = ""
 
 
         val diceHistoryManager = DiceHistoryManager()
         for (history in diceHistoryManager.historyList){
-                historyString += history.rollArraylist.toString() + "\n"
             addCustomUI(history)
         }
 
