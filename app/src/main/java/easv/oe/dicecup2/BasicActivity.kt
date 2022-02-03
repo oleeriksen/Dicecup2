@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import easv.oe.dicecup2.calculator.CalculatorActivity
 import easv.oe.dicecup2.dice.DiceActivity
 import easv.oe.dicecup2.greetings.WelcomeActivity
 
@@ -36,6 +37,11 @@ open class BasicActivity : AppCompatActivity() {
             }
             R.id.MainMenuDice -> {
                 val intent = Intent(this, DiceActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.MainMenuCalculator -> {
+                val intent = Intent(this, CalculatorActivity::class.java)
                 startActivity(intent)
                 true
             }

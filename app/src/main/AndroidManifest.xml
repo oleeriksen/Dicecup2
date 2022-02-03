@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dicecup2">
         <activity
+            android:name=".calculator.CalculatorActivity"
+            android:exported="false" />
+        <activity
             android:name=".dice.DiceActivity"
             android:exported="false" />
         <activity
