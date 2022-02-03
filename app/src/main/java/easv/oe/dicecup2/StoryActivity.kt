@@ -7,13 +7,20 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import easv.oe.dicecup2.DiceManagers.DiceManager
 import kotlinx.android.synthetic.main.activity_story.*
 
 class StoryActivity : BasicActivity() {
+
+    lateinit var diceManager: DiceManager
+
+
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_story)
+
+        diceManager = DiceManager()
         var historyString = ""
 
 
@@ -46,12 +53,7 @@ class StoryActivity : BasicActivity() {
         var d8 = view.findViewById<ImageView>(R.id.dice8)
         var d9 = view.findViewById<ImageView>(R.id.dice9)
 
-        val diceId = intArrayOf(0, R.drawable.dice1,
-            R.drawable.dice2,
-            R.drawable.dice3,
-            R.drawable.dice4,
-            R.drawable.dice5,
-            R.drawable.dice6)
+        val diceId = diceManager.diceImages
 
         val images = ArrayList<ImageView>();
         images.add(d1)
