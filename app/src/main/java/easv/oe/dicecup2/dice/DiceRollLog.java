@@ -1,4 +1,4 @@
-package easv.oe.dicecup2;
+package easv.oe.dicecup2.dice;
 
 import androidx.annotation.NonNull;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class DiceRollLog {
 
-    private ArrayList<Integer> dices;
+    private final ArrayList<Integer> dices;
 
     public DiceRollLog(ArrayList<Integer> dices) {
         this.dices = dices;

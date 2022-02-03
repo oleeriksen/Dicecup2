@@ -1,4 +1,4 @@
-package easv.oe.dicecup2
+package easv.oe.dicecup2.dice
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.SeekBar
-import easv.oe.dicecup2.DiceManagers.DiceManager
+import easv.oe.dicecup2.*
 import kotlinx.android.synthetic.main.activity_dice.*
 import kotlin.collections.ArrayList
 
@@ -76,7 +76,7 @@ class DiceActivity : BasicActivity() {
     }
 
     private fun onCLickStory(){
-        val intent = Intent(this, StoryActivity::class.java)
+        val intent = Intent(this, DiceStoryActivity::class.java)
         startActivity(intent)
     }
 

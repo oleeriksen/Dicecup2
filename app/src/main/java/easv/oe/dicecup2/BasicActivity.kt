@@ -5,6 +5,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import easv.oe.dicecup2.dice.DiceActivity
+import easv.oe.dicecup2.greetings.WelcomeActivity
 
 /**
  * Implements the thing all the basic activities need (i.e Main menu)

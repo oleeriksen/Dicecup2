@@ -1,9 +1,10 @@
-package easv.oe.dicecup2;
+package easv.oe.dicecup2.greetings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
+
+import easv.oe.dicecup2.Utils;
 
 /**
  * stores different greetings
@@ -49,7 +50,7 @@ public class GreetingsManager {
 
     private Boolean checkBoyName(String name){
         for (String boyName : boyNames) {
-            if(boyName.toLowerCase().equals(name.toLowerCase()))
+            if(boyName.equalsIgnoreCase(name))
                 return true;
         }
         return false;
@@ -57,7 +58,7 @@ public class GreetingsManager {
 
     private Boolean checkGirlName(String name){
         for (String girlName : girlNames) {
-            if(girlName.toLowerCase().equals(name.toLowerCase()))
+            if(girlName.equalsIgnoreCase(name))
                 return true;
         }
         return false;

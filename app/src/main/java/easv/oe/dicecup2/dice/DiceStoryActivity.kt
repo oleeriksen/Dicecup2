@@ -1,17 +1,19 @@
-package easv.oe.dicecup2
+package easv.oe.dicecup2.dice
 
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
-import easv.oe.dicecup2.DiceManagers.DiceManager
+import easv.oe.dicecup2.BasicActivity
+import easv.oe.dicecup2.R
 import kotlinx.android.synthetic.main.activity_story.*
 import kotlinx.android.synthetic.main.roll.view.*
 
-class StoryActivity : BasicActivity() {
+class DiceStoryActivity : BasicActivity() {
 
     lateinit var diceManager: DiceManager
+    lateinit var diceHistoryManager: DiceHistoryManager
 
 
     @SuppressLint("ResourceAsColor")
@@ -20,15 +22,14 @@ class StoryActivity : BasicActivity() {
         setContentView(R.layout.activity_story)
 
         diceManager = DiceManager()
+        diceHistoryManager = DiceHistoryManager()
 
 
-        val diceHistoryManager = DiceHistoryManager()
         for (history in diceHistoryManager.historyList){
             addCustomUI(history)
         }
 
         back.setOnClickListener{ onClickBack()}
-
     }
 
     @SuppressLint("ResourceAsColor")
@@ -36,7 +37,7 @@ class StoryActivity : BasicActivity() {
         val view = layoutInflater.inflate(R.layout.roll, null)
         val allDices = listOf(view.dice1, view.dice2, view.dice3, view.dice4, view.dice5, view.dice6, view.dice7, view.dice8, view.dice9)
 
-        view.txtRollText.setText(rollLog.diceAmountString)
+        view.txtRollText.text = rollLog.diceAmountString
         view.txtRollText.setTypeface(null, Typeface.BOLD)
         view.txtRollText.setTextColor(Color.WHITE)
 

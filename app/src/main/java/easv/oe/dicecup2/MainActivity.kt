@@ -2,6 +2,8 @@ package easv.oe.dicecup2
 
 import android.content.Intent
 import android.os.Bundle
+import easv.oe.dicecup2.dice.DiceActivity
+import easv.oe.dicecup2.greetings.WelcomeActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BasicActivity() {

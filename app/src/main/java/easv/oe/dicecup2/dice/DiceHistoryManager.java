@@ -1,4 +1,4 @@
-package easv.oe.dicecup2;
+package easv.oe.dicecup2.dice;
 
 import java.util.ArrayList;
 import java.util.List;

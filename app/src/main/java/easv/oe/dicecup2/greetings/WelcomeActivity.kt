@@ -1,6 +1,8 @@
-package easv.oe.dicecup2
+package easv.oe.dicecup2.greetings
 
 import android.os.Bundle
+import easv.oe.dicecup2.BasicActivity
+import easv.oe.dicecup2.R
 import kotlinx.android.synthetic.main.activity_welcome.*
 
 class WelcomeActivity : BasicActivity() {
@@ -38,7 +40,7 @@ class WelcomeActivity : BasicActivity() {
 
     //endregion
 
-    fun changeColor(name: String){
+    private fun changeColor(name: String){
         when(greetingsManager.checkName(name)){
             "Boy" -> constLayout.setBackgroundColor(-16776961)
             "Girl" -> constLayout.setBackgroundColor(-65536)
