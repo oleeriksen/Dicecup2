@@ -62,6 +62,21 @@ class StoryActivity : BasicActivity() {
         view.txtRollText.setText("Amount of rolled dice: " + amount)
         view.txtRollText.setTypeface(null, Typeface.BOLD)
         view.txtRollText.setTextColor(Color.WHITE)
+
+
+        var i = 0
+        for(dice in allDices){
+            if(i<amount){
+                dice.visibility = View.VISIBLE
+            }
+
+            else{
+                dice.visibility = View.GONE
+            }
+        }
+
+
+        /*
         when(amount){
             2-> d2.visibility= View.VISIBLE
             3-> {d2.visibility= View.VISIBLE
@@ -108,6 +123,8 @@ class StoryActivity : BasicActivity() {
                 d8.visibility= View.GONE
                 d9.visibility= View.GONE}
         }
+        
+         */
 
         for (i in (0 until amount)) {
             allDices[i].setImageResource(diceId[array[i]])
