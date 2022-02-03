@@ -8,7 +8,10 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import easv.oe.dicecup2.DiceManagers.DiceManager
+import kotlinx.android.synthetic.main.activity_dice.*
 import kotlinx.android.synthetic.main.activity_story.*
+import kotlinx.android.synthetic.main.roll.*
+import kotlinx.android.synthetic.main.roll.view.*
 
 class StoryActivity : BasicActivity() {
 
@@ -41,7 +44,6 @@ class StoryActivity : BasicActivity() {
     @SuppressLint("ResourceAsColor")
     fun addCustomUI(amount: Int, array: ArrayList<Int>){
         var view = layoutInflater.inflate(R.layout.roll, null)
-        var rollAmount = view.findViewById<TextView>(R.id.txtRollText)
 
         var d1 = view.findViewById<ImageView>(R.id.dice1)
         var d2 = view.findViewById<ImageView>(R.id.dice2)
@@ -55,20 +57,11 @@ class StoryActivity : BasicActivity() {
 
         val diceId = diceManager.diceImages
 
-        val images = ArrayList<ImageView>();
-        images.add(d1)
-        images.add(d2)
-        images.add(d3)
-        images.add(d4)
-        images.add(d5)
-        images.add(d6)
-        images.add(d7)
-        images.add(d8)
-        images.add(d9)
+        val allDices = listOf(view.dice1, view.dice2, view.dice3, view.dice4, view.dice4, view.dice5, view.dice6, view.dice7, view.dice8, view.dice9)
 
-        rollAmount.setText("Amount of rolled dice: " + amount)
-        rollAmount.setTypeface(null, Typeface.BOLD)
-        rollAmount.setTextColor(Color.WHITE)
+        view.txtRollText.setText("Amount of rolled dice: " + amount)
+        view.txtRollText.setTypeface(null, Typeface.BOLD)
+        view.txtRollText.setTextColor(Color.WHITE)
         when(amount){
             2-> d2.visibility= View.VISIBLE
             3-> {d2.visibility= View.VISIBLE
@@ -117,7 +110,7 @@ class StoryActivity : BasicActivity() {
         }
 
         for (i in (0 until amount)) {
-            images[i].setImageResource(diceId[array[i]])
+            allDices[i].setImageResource(diceId[array[i]])
         }
 
 
