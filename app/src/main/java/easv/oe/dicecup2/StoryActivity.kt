@@ -1,25 +1,20 @@
 package easv.oe.dicecup2
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
-import android.util.TypedValue
 import android.view.View
-import android.widget.*
-import androidx.constraintlayout.widget.ConstraintLayout
-import kotlinx.android.synthetic.main.*
+import android.widget.ImageView
+import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_story.*
-import kotlinx.android.synthetic.main.roll.*
 
 class StoryActivity : BasicActivity() {
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_story)
-        var historyString :String = ""
+        var historyString = ""
 
 
         val diceHistoryManager = DiceHistoryManager()
@@ -28,7 +23,7 @@ class StoryActivity : BasicActivity() {
             addCustomUI(history.diceAmount, history.diceRolls)
         }
 
-        back.setOnClickListener{v -> back()}
+        back.setOnClickListener{ back()}
 
     }
 
