@@ -20,6 +20,8 @@ class MainActivity : AppCompatActivity() {
 
     private val mRandomGenerator = Random()
 
+    private val mHistory = mutableListOf<Pair<Int, Int>>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -34,12 +36,32 @@ class MainActivity : AppCompatActivity() {
 
         // set dices
         updateDicesWith(e1, e2)
+
+        // add to history
+        mHistory.add(Pair(e1, e2))
+        if (mHistory.size > 5)
+            mHistory.removeAt(0)
+
+        Log.d(TAG, "history size ${mHistory.size}")
+        // update view
+        tvHistory.text = historyAsString()
+
+
         Log.d(TAG, "Roll")
     }
 
     private fun updateDicesWith(d1: Int, d2: Int) {
         imgDice1.setImageResource( diceId[d1] )
         imgDice2.setImageResource( diceId[d2] )
+    }
+
+    private fun historyAsString(): String {
+        var res = ""
+        mHistory.forEach { p ->
+            res += "${p.first} - ${p.second}\n"
+        }
+        return res
+
     }
 
 
