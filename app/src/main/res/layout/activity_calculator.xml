@@ -2,249 +2,243 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    tools:context=".calculator.CalculatorActivity">
+    android:background="#FFFFFF"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/txt_output"
+        android:layout_width="412dp"
+        android:layout_height="46dp"
+        android:background="#FFFFFF"
+        android:gravity="bottom|end"
+        android:paddingRight="90px"
+        android:text="1+1"
+        android:textAlignment="textEnd"
+        android:textColor="#535353"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_input"
+        android:layout_width="412dp"
+        android:layout_height="46dp"
+        android:background="#FFFFFF"
+        android:gravity="bottom|end"
+        android:paddingRight="90px"
+        android:text="1+1"
+        android:textAlignment="textEnd"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_output"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="411dp"
-        android:layout_height="543dp"
-        android:orientation="vertical"
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EDBEC8"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="131dp"
-            android:orientation="horizontal">
+        <TableLayout
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:stretchColumns="2">
 
-            <TextView
-                android:id="@+id/tvInput"
-                android:layout_width="252dp"
-                android:layout_height="match_parent"
-                android:text="input" />
-
-            <TextView
-                android:id="@+id/tvOutput"
-                android:layout_width="160dp"
-                android:layout_height="match_parent"
-                android:text="output" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TableLayout
-                android:layout_width="301dp"
-                android:layout_height="match_parent"
-                android:weightSum="3" >
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    >
-
-                    <Button
-                        android:id="@+id/btn1"
-                        android:minHeight="0dp"
-                        android:minWidth="0dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:text="1" />
-
-                    <Button
-                        android:id="@+id/btn2"
-                        android:minHeight="0dp"
-                        android:minWidth="0dp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="2" />
-
-                    <Button
-                        android:id="@+id/btn3"
-                        android:minHeight="0dp"
-                        android:minWidth="0dp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:layout_width="104dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="3" />
-
-                    <Button
-                        android:id="@+id/btnPlus"
-                        android:minHeight="0dp"
-                        android:minWidth="0dp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="+" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <Button
-                        android:id="@+id/btn4"
-                        android:minHeight="0dp"
-                        android:minWidth="0dp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="4" />
-
-                    <Button
-                        android:id="@+id/btn5"
-                        android:minHeight="0dp"
-                        android:minWidth="0dp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="5" />
-
-                    <Button
-                        android:id="@+id/btn6"
-                        android:minHeight="0dp"
-                        android:minWidth="0dp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="6" />
-
-                    <Button
-                        android:id="@+id/btnMinus"
-                        android:minHeight="0dp"
-                        android:minWidth="0dp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="-" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <Button
-                        android:id="@+id/btn7"
-                        android:minHeight="0dp"
-                        android:minWidth="0dp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="7" />
-
-                    <Button
-                        android:id="@+id/btn8"
-                        android:minHeight="0dp"
-                        android:minWidth="0dp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="8" />
-
-                    <Button
-                        android:id="@+id/btn9"
-                        android:minHeight="0dp"
-                        android:minWidth="0dp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="9" />
-
-                    <Button
-                        android:id="@+id/btnTimes"
-                        android:minHeight="0dp"
-                        android:minWidth="0dp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="*" />
-                </TableRow>
-
-            </TableLayout>
-
-            <TableLayout
+            <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:stretchColumns="0"
-                android:weightSum="3">
+                android:background="#000000">
 
-                <TableRow
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/btn_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#EDBEC8"
+                    android:textColor="#852a52"
+                    android:text="+" />
+
+                <Button
+                    android:id="@+id/btn_minus"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    >
+                    android:background="#EDBEC8"
+                    android:foregroundTint="#000000"
+                    android:textColor="#852a52"
+                    android:text="-" />
 
-                    <Button
-                        android:layout_marginLeft="-5dip"
-                        android:layout_marginRight="-5dip"
-                        android:layout_marginTop="-5dip"
-                        android:layout_marginBottom="-5dip"
-                        android:minHeight="0dp"
-                        android:minWidth="0dp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:id="@+id/btnEnter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="Enter" />
-                </TableRow>
+                <Button
+                    android:id="@+id/btn_gange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#EDBEC8"
+                    android:foregroundTint="#000000"
+                    android:textColor="#852a52"
+                    android:text="*" />
 
-                <TableRow
-                    android:layout_width="match_parent"
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#000000">
+
+
+                <Button
+                    android:id="@+id/btn_7"
+                    android:layout_height="wrap_content"
+                    android:background="#EDBEC8"
+                    android:textColor="#852a52"
+                    android:text="7" />
+
+                <Button
+                    android:id="@+id/btn_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#852a52"
+                    android:background="#EDBEC8"
+                    android:text="8" />
+
+                <Button
+                    android:id="@+id/btn_9"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:textColor="#852a52"
+                    android:background="#EDBEC8"
+                    android:text="9" />
 
-                    <Button
-                        android:layout_marginLeft="-5dip"
-                        android:layout_marginRight="-5dip"
-                        android:layout_marginTop="-5dip"
-                        android:layout_marginBottom="-5dip"
-                        android:minHeight="0dp"
-                        android:minWidth="0dp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:id="@+id/btnDivide"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="/" />
-                </TableRow>
-            </TableLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#000000">
+
+
+                <Button
+                    android:id="@+id/btn_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#852a52"
+                    android:background="#EDBEC8"
+                    android:text="4" />
+
+                <Button
+                    android:id="@+id/btn_5"
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#852a52"
+                    android:background="#EDBEC8"
+                    android:text="5" />
+
+                <Button
+                    android:id="@+id/btn_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#852a52"
+                    android:background="#EDBEC8"
+                    android:text="6" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#000000">
+
+                <Button
+                    android:id="@+id/btn_1"
+                    android:layout_width="26dp"
+                    android:layout_height="match_parent"
+                    android:textColor="#852a52"
+                    android:background="#EDBEC8"
+                    android:text="1" />
+
+                <Button
+                    android:id="@+id/btn_2"
+                    android:layout_width="72dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#852a52"
+                    android:background="#EDBEC8"
+                    android:text="2" />
+
+                <Button
+                    android:id="@+id/btn_3"
+                    android:layout_width="54dp"
+                    android:layout_height="wrap_content"
+                    android:background="#EDBEC8"
+                    android:textColor="#852a52"
+                    android:text="3" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#000000">
+
+                <Button
+                    android:id="@+id/btn_comma"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#852a52"
+                    android:background="#EDBEC8"
+                    android:foregroundTint="#000000"
+                    android:text="," />
+
+                <Button
+                    android:id="@+id/btn_0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#EDBEC8"
+                    android:textColor="#852a52"
+                    android:foregroundTint="#000000"
+                    android:text="0" />
+
+                <Button
+                    android:id="@+id/btn_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#EDBEC8"
+                    android:textColor="#852a52"
+                    android:foregroundTint="#000000"
+                    android:text="←" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#852a52"
+                android:background="#EDBEC8"
+                android:text="%" />
+
+            <Button
+                android:id="@+id/btn_enter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="#852a52"
+                android:background="#EDBEC8"
+                android:text="ENTER" />
         </LinearLayout>
-    </LinearLayout>
 
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
