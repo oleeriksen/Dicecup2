@@ -4,9 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import easv.oe.dicecup2.BasicActivity;
 import easv.oe.dicecup2.R;
 
-public class CalculatorActivity extends AppCompatActivity {
+public class CalculatorActivity extends BasicActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
