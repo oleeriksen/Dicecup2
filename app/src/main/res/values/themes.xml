@@ -16,9 +16,9 @@
 
 
     <style name="CalcButton" parent="Widget.AppCompat.Button">
-        <item name="android:background">#EDBEC8</item>
-        <item name="android:foregroundTint">#000000</item>
-        <item name="android:textColor">#852a52</item>
-        
+        <item name="android:background">@color/babyPink</item>
+        <item name="android:foregroundTint">@color/black</item>
+        <item name="android:textColor">@color/magenta</item>
+
     </style>
 </resources>
