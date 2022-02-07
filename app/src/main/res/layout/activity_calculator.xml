@@ -48,6 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+
         <TableLayout
             android:layout_width="279dp"
             android:layout_height="wrap_content"
@@ -63,26 +64,21 @@
                     android:id="@+id/btn_plus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#EDBEC8"
-                    android:textColor="#852a52"
+                    style="@style/CalcButton"
                     android:text="+" />
 
                 <Button
                     android:id="@+id/btn_minus"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:background="#EDBEC8"
-                    android:foregroundTint="#000000"
-                    android:textColor="#852a52"
+                    style="@style/CalcButton"
                     android:text="-" />
 
                 <Button
                     android:id="@+id/btn_gange"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#EDBEC8"
-                    android:foregroundTint="#000000"
-                    android:textColor="#852a52"
+                    style="@style/CalcButton"
                     android:text="*" />
 
             </TableRow>
@@ -96,24 +92,21 @@
                 <Button
                     android:id="@+id/btn_7"
                     android:layout_height="wrap_content"
-                    android:background="#EDBEC8"
-                    android:textColor="#852a52"
+                    style="@style/CalcButton"
                     android:text="7" />
 
                 <Button
                     android:id="@+id/btn_8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#852a52"
-                    android:background="#EDBEC8"
+                    style="@style/CalcButton"
                     android:text="8" />
 
                 <Button
                     android:id="@+id/btn_9"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textColor="#852a52"
-                    android:background="#EDBEC8"
+                    style="@style/CalcButton"
                     android:text="9" />
 
             </TableRow>
@@ -128,24 +121,21 @@
                     android:id="@+id/btn_4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#852a52"
-                    android:background="#EDBEC8"
+                    style="@style/CalcButton"
                     android:text="4" />
 
                 <Button
                     android:id="@+id/btn_5"
                     android:layout_width="10dp"
                     android:layout_height="wrap_content"
-                    android:textColor="#852a52"
-                    android:background="#EDBEC8"
+                    style="@style/CalcButton"
                     android:text="5" />
 
                 <Button
                     android:id="@+id/btn_6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#852a52"
-                    android:background="#EDBEC8"
+                    style="@style/CalcButton"
                     android:text="6" />
 
             </TableRow>
@@ -159,24 +149,21 @@
                     android:id="@+id/btn_1"
                     android:layout_width="26dp"
                     android:layout_height="match_parent"
-                    android:textColor="#852a52"
-                    android:background="#EDBEC8"
+                    style="@style/CalcButton"
                     android:text="1" />
 
                 <Button
                     android:id="@+id/btn_2"
                     android:layout_width="72dp"
                     android:layout_height="wrap_content"
-                    android:textColor="#852a52"
-                    android:background="#EDBEC8"
+                    style="@style/CalcButton"
                     android:text="2" />
 
                 <Button
                     android:id="@+id/btn_3"
                     android:layout_width="54dp"
                     android:layout_height="wrap_content"
-                    android:background="#EDBEC8"
-                    android:textColor="#852a52"
+                    style="@style/CalcButton"
                     android:text="3" />
 
             </TableRow>
@@ -190,27 +177,21 @@
                     android:id="@+id/btn_comma"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#852a52"
-                    android:background="#EDBEC8"
-                    android:foregroundTint="#000000"
+                    style="@style/CalcButton"
                     android:text="," />
 
                 <Button
                     android:id="@+id/btn_0"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:background="#EDBEC8"
-                    android:textColor="#852a52"
-                    android:foregroundTint="#000000"
+                    style="@style/CalcButton"
                     android:text="0" />
 
                 <Button
                     android:id="@+id/btn_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#EDBEC8"
-                    android:textColor="#852a52"
-                    android:foregroundTint="#000000"
+                    style="@style/CalcButton"
                     android:text="←" />
 
             </TableRow>
@@ -226,16 +207,14 @@
                 android:id="@+id/btn_divider"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#852a52"
-                android:background="#EDBEC8"
+                style="@style/CalcButton"
                 android:text="%" />
 
             <Button
                 android:id="@+id/btn_enter"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textColor="#852a52"
-                android:background="#EDBEC8"
+                style="@style/CalcButton"
                 android:text="ENTER" />
         </LinearLayout>
 
