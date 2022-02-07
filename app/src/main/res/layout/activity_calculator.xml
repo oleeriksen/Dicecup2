@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".MainActivity">
+    tools:context=".calculator.CalculatorActivity">
 
     <TextView
         android:id="@+id/txt_output"
