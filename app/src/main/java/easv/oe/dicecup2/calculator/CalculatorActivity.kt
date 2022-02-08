@@ -12,7 +12,7 @@ class CalculatorActivity : BasicActivity() {
 
     private var userInput: String = ""
     private var userOutput: String = ""
-    private val operators = """/[+/-x]/g""".toRegex()
+    //private val operators = """/[+/-x]/g""".toRegex()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,7 +70,7 @@ class CalculatorActivity : BasicActivity() {
 
         if(userInput.contains(",")){
 
-            var inputArr = userInput.split(operators)
+            var inputArr = userInput.split("x", "+", "/", "-")
             if(!inputArr[inputArr.size-1].contains(",")){
                 userInput += ","
             }
