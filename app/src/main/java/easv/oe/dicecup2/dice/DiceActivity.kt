@@ -1,11 +1,16 @@
 package easv.oe.dicecup2.dice
 
+import android.app.Activity
 import android.content.Intent
+import android.content.res.Configuration
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.OrientationEventListener
 import android.view.View
 import android.widget.ImageView
 import android.widget.SeekBar
+import androidx.appcompat.widget.LinearLayoutCompat
 import easv.oe.dicecup2.*
 import kotlinx.android.synthetic.main.activity_dice.*
 import kotlin.collections.ArrayList
@@ -43,8 +48,7 @@ class DiceActivity : BasicActivity() {
     //region Setup Listeners
 
     private fun addListeners() {
-        btnRoll.setOnClickListener { onClickRoll() }
-        btnStory.setOnClickListener { onCLickStory() }
+
         seekBarDiceAmount.setOnSeekBarChangeListener(diceAmountSetupListener())
     }
 
