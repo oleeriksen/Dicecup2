@@ -10,6 +10,8 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG: String = "xyz"
 
+    private val HISTORY = "HISTORY"
+
     // mapping from 1..6 to drawables, the first index is unused
     private val diceId = intArrayOf(0, R.drawable.dice1,
         R.drawable.dice2,
@@ -27,6 +29,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         btnRoll.setOnClickListener { v -> onClickRoll() }
         Log.d(TAG, "OnCreate")
+        if (savedInstanceState != null)
+        {
+            var pairs = savedInstanceState.getSerializable(HISTORY) as Array<Pair<Int, Int>>
+            mHistory.addAll(pairs)
+            tvHistory.text = historyAsString()
+            if (mHistory.size > 0)
+            {
+                val firstDice = mHistory[mHistory.size-1].first
+                val secondDice = mHistory[mHistory.size-1].second
+                updateDicesWith(firstDice, secondDice)
+            }
+        }
 
     }
 
@@ -57,12 +71,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun historyAsString(): String {
         var res = ""
+
         mHistory.forEach { p ->
             res += "${p.first} - ${p.second}\n"
         }
         return res
-
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable(HISTORY, mHistory.toTypedArray())
+    }
+
 
 
 
