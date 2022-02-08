@@ -10,7 +10,7 @@ class CalculatorActivity : BasicActivity() {
 
     private var userInput: String = ""
     private var userOutput: String = ""
-    private val operators = """/[+/-x]/g""".toRegex()
+    //private val operators = """/[+/-x]/g""".toRegex()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +68,7 @@ class CalculatorActivity : BasicActivity() {
 
         if(userInput.contains(",")){
 
-            var inputArr = userInput.split(operators)
+            var inputArr = userInput.split("x", "+", "/", "-")
             if(!inputArr[inputArr.size-1].contains(",")){
                 userInput += ","
             }
@@ -84,16 +84,29 @@ class CalculatorActivity : BasicActivity() {
         var result = 0.0
 
         if (txt_input.text.isNotBlank()) {
-            if (userInput.contains(operators)) {
 
-                if (userInput.contains("x")) {
-                    //TODO
-                } else if (userInput.contains("+")) {
-                    val plusArr = userInput.split("+")
+            if (userInput.contains("x")) {
+                val timesArr = userInput.split("x")
 
-                    for (number in plusArr) {
-                       result = result.plus(number.toDouble())
+                var timesResult = 0.0
+
+                for ((i, number) in timesArr.withIndex()){
+                    if(i==0){
+                        timesResult = number.toDouble();
                     }
+                    else {
+                        timesResult = timesResult.times(number.toDouble())
+                    }
+                }
+
+                result = timesResult
+            }
+
+            if (userInput.contains("+")) {
+                val plusArr = userInput.split("+")
+
+                for (number in plusArr) {
+                   result = result.plus(number.toDouble())
                 }
             }
         }
