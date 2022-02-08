@@ -1,19 +1,23 @@
 package easv.oe.dicecup2.dice
 
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
-import android.graphics.drawable.GradientDrawable
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.OrientationEventListener
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.SeekBar
-import androidx.appcompat.widget.LinearLayoutCompat
-import easv.oe.dicecup2.*
+import easv.oe.dicecup2.BasicActivity
+import easv.oe.dicecup2.R
+import easv.oe.dicecup2.Utils
 import kotlinx.android.synthetic.main.activity_dice.*
-import kotlin.collections.ArrayList
+import kotlinx.android.synthetic.main.activity_story.*
+import kotlinx.android.synthetic.main.roll.view.*
 
 class DiceActivity : BasicActivity() {
 
@@ -35,6 +39,16 @@ class DiceActivity : BasicActivity() {
         setContentView(R.layout.activity_dice)
         Log.d(TAG, "OnCreate")
 
+
+        diceManager = DiceManager()
+        diceHistory = DiceHistoryManager()
+
+        val orientation = resources.configuration.orientation
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            supportActionBar?.hide()
+        } else {
+            // In portrait
+        }
         utils = Utils()
         diceHistory = DiceHistoryManager()
         diceManager = DiceManager()
@@ -48,6 +62,17 @@ class DiceActivity : BasicActivity() {
     //region Setup Listeners
 
     private fun addListeners() {
+
+        val orientation = resources.configuration.orientation
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            btnStory.setOnClickListener { onCLickStory() }
+        }else{
+            for (history in diceHistory.historyList){
+                addCustomUI(history, historyview)
+            }
+        }
+        btnRoll.setOnClickListener { onClickRoll() }
+
 
         seekBarDiceAmount.setOnSeekBarChangeListener(diceAmountSetupListener())
     }
@@ -108,6 +133,8 @@ class DiceActivity : BasicActivity() {
     }
 
     private fun updateDices() {
+
+
         val diceRolls = ArrayList<Int>()
 
         var i = 1
@@ -121,7 +148,37 @@ class DiceActivity : BasicActivity() {
         }
 
         diceHistory.addToHistory(DiceRollLog(diceRolls))
+
+        val orientation = resources.configuration.orientation
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            historyview.removeAllViews();
+            for (history in diceHistory.historyList) {
+                addCustomUI(history, historyview)
+            }
+        }
     }
 
+
+    @SuppressLint("ResourceAsColor")
+    fun addCustomUI(rollLog: DiceRollLog, v: LinearLayout){
+        val view = layoutInflater.inflate(R.layout.roll, null)
+        val allDices = listOf(view.dice1, view.dice2, view.dice3, view.dice4, view.dice5, view.dice6, view.dice7, view.dice8, view.dice9)
+
+        view.txtRollText.text = rollLog.diceAmountString
+        view.txtRollText.setTypeface(null, Typeface.BOLD)
+        view.txtRollText.setTextColor(Color.WHITE)
+
+        //For each dice, if the dice has an index lower than the total amount of dices in the current diceRollLog, the dice will be shown with an image;
+        for((i, dice) in allDices.withIndex()){
+            if(i<rollLog.diceAmount){
+                dice.visibility = View.VISIBLE
+                allDices[i].setImageResource(diceManager.diceImages[rollLog.dices[i]])
+            }
+            else{
+                dice.visibility = View.GONE
+            }
+        }
+        v.addView(view)
+    }
     //endregion
 }
