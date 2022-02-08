@@ -11,7 +11,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#292929"
+            android:background="@color/magenta"
             android:orientation="vertical">
 
             <TextView
@@ -28,14 +28,12 @@
                 android:orientation="horizontal">
 
 
-
                 <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:background="#292929"
-                    android:gravity="center"
-                    >
+                    android:background="@color/magenta"
+                    android:gravity="center">
 
                     <TableRow
                         android:layout_width="wrap_content"

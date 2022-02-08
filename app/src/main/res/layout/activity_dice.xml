@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/babyPink"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    tools:context=".dice.DiceActivity"
-    android:background="@color/white">
+    tools:context=".dice.DiceActivity">
 
     <LinearLayout
         android:id="@+id/layout1"
@@ -16,6 +16,7 @@
         android:layout_height="88dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="30dp"
+        android:background="@color/babyPink"
         android:orientation="vertical">
 
         <LinearLayout
@@ -28,10 +29,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dicecup - basic version"
-                android:textSize="25dp"
-                android:textStyle="bold"
                 android:textColor="@color/black"
-                />
+                android:textSize="25dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvHeader3"
@@ -48,9 +48,9 @@
                 android:layout_height="34dp"
                 android:layout_weight="1"
                 android:text="2"
+                android:textColor="@color/black"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -59,7 +59,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:max="9"
-            android:min="1"/>
+            android:min="1"
+            android:thumbTint="@color/magenta"
+            android:progressTint="@color/magenta" />
     </LinearLayout>
 
     <Button

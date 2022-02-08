@@ -4,8 +4,8 @@
     android:id="@+id/cl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".dice.DiceStoryActivity"
-    android:background="#292929">
+    android:background="@color/magenta"
+    tools:context=".dice.DiceStoryActivity">
 
     <Button
         android:id="@+id/back"
@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="50dp"
+        android:background="@color/magenta"
         android:orientation="vertical">
 
         <LinearLayout
