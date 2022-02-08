@@ -4,6 +4,8 @@ import android.os.Bundle
 import easv.oe.dicecup2.BasicActivity
 import easv.oe.dicecup2.R
 import kotlinx.android.synthetic.main.activity_calculator.*
+import org.mariuszgromada.math.mxparser.Expression
+
 
 class CalculatorActivity : BasicActivity() {
 
@@ -81,22 +83,14 @@ class CalculatorActivity : BasicActivity() {
 
     private fun onClickEnter(){
 
-        var result = 0.0
+        var userExp : String = txt_input.text.toString();
+        
+        userExp = userExp.replace(",", ".")
+        userExp = userExp.replace("x", "*")
 
-        if (txt_input.text.isNotBlank()) {
-            if (userInput.contains(operators)) {
+        val exp : Expression = Expression(userExp)
 
-                if (userInput.contains("x")) {
-                    //TODO
-                } else if (userInput.contains("+")) {
-                    val plusArr = userInput.split("+")
-
-                    for (number in plusArr) {
-                       result = result.plus(number.toDouble())
-                    }
-                }
-            }
-        }
+        var result : String = java.lang.String.valueOf(exp.calculate())
 
         userOutput = result.toString()
         updateTxt()
