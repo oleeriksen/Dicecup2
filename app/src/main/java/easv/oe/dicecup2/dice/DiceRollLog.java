@@ -2,9 +2,10 @@ package easv.oe.dicecup2.dice;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DiceRollLog {
+public class DiceRollLog implements Serializable {
 
     private final ArrayList<Integer> dices;
 

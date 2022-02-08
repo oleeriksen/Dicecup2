@@ -1,14 +1,15 @@
 package easv.oe.dicecup2.dice;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * stores dice rolls
  */
-public class DiceHistoryManager {
+public class DiceHistoryManager implements Serializable {
 
-    static List<DiceRollLog> historyList = new ArrayList<>();
+    public List<DiceRollLog> historyList = new ArrayList<>();
 
     public List<DiceRollLog> getHistoryList() {
         return historyList;

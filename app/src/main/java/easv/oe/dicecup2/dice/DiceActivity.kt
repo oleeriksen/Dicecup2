@@ -105,8 +105,13 @@ class DiceActivity : BasicActivity() {
     }
 
     private fun onCLickStory(){
-        val intent = Intent(this, DiceStoryActivity::class.java)
+
+        val dsa = DiceStoryActivity()
+        val intent = Intent(this, dsa::class.java)
+        intent.putExtra("h", diceHistory)
         startActivity(intent)
+
+
     }
 
     //endregion

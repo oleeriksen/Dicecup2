@@ -10,11 +10,11 @@ import easv.oe.dicecup2.R
 import kotlinx.android.synthetic.main.activity_story.*
 import kotlinx.android.synthetic.main.roll.view.*
 
-class DiceStoryActivity : BasicActivity() {
+class DiceStoryActivity() : BasicActivity() {
 
     lateinit var diceManager: DiceManager
-    lateinit var diceHistoryManager: DiceHistoryManager
-
+    lateinit var diceHistoryManager : DiceHistoryManager
+    //var diceHistoryManager = historyManager
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +22,7 @@ class DiceStoryActivity : BasicActivity() {
         setContentView(R.layout.activity_story)
 
         diceManager = DiceManager()
-        diceHistoryManager = DiceHistoryManager()
+        diceHistoryManager = intent.getSerializableExtra("h") as DiceHistoryManager
 
 
         for (history in diceHistoryManager.historyList){
@@ -31,6 +31,10 @@ class DiceStoryActivity : BasicActivity() {
 
         back.setOnClickListener{ onClickBack()}
     }
+
+
+
+
 
     @SuppressLint("ResourceAsColor")
     fun addCustomUI(rollLog: DiceRollLog){
@@ -54,6 +58,8 @@ class DiceStoryActivity : BasicActivity() {
 
         container.addView(view)
     }
+
+
 
     //region onClick methods
 
