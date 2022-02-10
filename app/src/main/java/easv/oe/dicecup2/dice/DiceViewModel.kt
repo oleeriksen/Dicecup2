@@ -3,12 +3,9 @@ package easv.oe.dicecup2.dice
 import android.graphics.Color
 import android.graphics.Typeface
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.lifecycle.ViewModel
-import easv.oe.dicecup2.R
 import easv.oe.dicecup2.Utils
 import kotlinx.android.synthetic.main.roll.view.*
 
@@ -16,6 +13,7 @@ import kotlinx.android.synthetic.main.roll.view.*
 private const val TAG= "DiceViewModel"
 class DiceViewModel : ViewModel() {
 
+    var diceListFragment: DiceListFragment
     var currentDiceAmount = 2
 
     private val utils:Utils by lazy {
@@ -27,6 +25,8 @@ class DiceViewModel : ViewModel() {
     init {
         Log.d(TAG, "ViewModel instance created")
         diceHistoryManager = DiceHistoryManager();
+        diceListFragment = DiceListFragment()
+
     }
 
     override fun onCleared() {
@@ -37,25 +37,27 @@ class DiceViewModel : ViewModel() {
     // mapping from 1..6 to drawables, the first index is unused
     private val diceImages = DiceImageManager().diceImages;
 
-    fun getDiceImages(): IntArray {
-        return diceImages
-    }
-
     fun performRoll(allDices: List<ImageView>) {
-        val diceRolls = ArrayList<Int>()
+
+
+        val diceRolls2 = ArrayList<Int>()
 
         var i = 1
         for(dice in allDices){
             if(dice.visibility == View.VISIBLE) {
                 val ranNum = utils.getRandomInt(1, 6)
                 dice.setImageResource(diceImages[ranNum])
-                diceRolls.add(ranNum)
+                diceRolls2.add(ranNum)
             }
             i += 1
         }
 
-        diceHistoryManager.addToHistory(DiceRollLog(diceRolls))
+        diceHistoryManager.addToHistory(DiceRollLog(diceRolls2))
 
+    }
+
+    fun roll(){
+        diceListFragment.rollDice(diceHistoryManager)
     }
 
     fun updateDiceVisibility(dices: List<ImageView>, diceAmount: Int) {
@@ -72,6 +74,8 @@ class DiceViewModel : ViewModel() {
             i += 1
         }
     }
+
+
 
     fun updateDiceFromHistory(dices: List<ImageView>) {
         if(diceHistoryManager.historyList.isNotEmpty()){

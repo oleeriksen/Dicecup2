@@ -2,10 +2,8 @@ package easv.oe.dicecup2.dice
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
-import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import androidx.lifecycle.ViewModelProvider
@@ -14,14 +12,14 @@ import easv.oe.dicecup2.R
 import kotlinx.android.synthetic.main.activity_dice.*
 
 private const val TAG = "DiceActivity"
-private const val KEY_INDEX = "index"
 
 
 class DiceActivity : BasicActivity() {
 
     //region Vars and vals
-    private lateinit var allDices: List<ImageView>
+    //private lateinit var allDices: List<ImageView>
     private val orientation: Int by lazy { resources.configuration.orientation }
+
 
     private val diceViewModel :DiceViewModel by lazy {
         ViewModelProvider(this).get(DiceViewModel::class.java)
@@ -31,10 +29,10 @@ class DiceActivity : BasicActivity() {
         diceViewModel.diceHistoryManager
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
+    override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        super.onSaveInstanceState(savedInstanceState)
         Log.i(TAG, "onSaveInstanceState")
-        outState.putSerializable(KEY_INDEX, diceViewModel.diceHistoryManager)
+
     }
 
 
@@ -45,23 +43,22 @@ class DiceActivity : BasicActivity() {
         Log.d(TAG, "OnCreate(Bundle?) called")
         setContentView(R.layout.activity_dice)
 
-
-        if(savedInstanceState?.getSerializable(KEY_INDEX) != null) {
-                diceViewModel.diceHistoryManager = savedInstanceState.getSerializable(KEY_INDEX) as DiceHistoryManager
-            }
-
-
-
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             supportActionBar?.hide()
         } else {
+            val currentFragment = supportFragmentManager.findFragmentById(R.id.diceFragment)
+
+            if(currentFragment == null){
+                diceViewModel.diceListFragment  = DiceListFragment.newInstance()
+                supportFragmentManager.beginTransaction().add(R.id.diceFragment, diceViewModel.diceListFragment).commit()
+            }
             // In portrait
         }
 
-        allDices = listOf(imgDice1, imgDice2, imgDice3, imgDice4, imgDice5, imgDice6, imgDice7, imgDice8, imgDice9)
+        //allDices = listOf(imgDice1, imgDice2, imgDice3, imgDice4, imgDice5, imgDice6, imgDice7, imgDice8, imgDice9)
 
-        diceViewModel.updateDiceFromHistory(allDices)
-        updateDiceVisibility(diceViewModel.currentDiceAmount)
+        //diceViewModel.updateDiceFromHistory(allDices)
+        updateDiceVisibility(2)
         addListeners()
     }
 
@@ -88,7 +85,9 @@ class DiceActivity : BasicActivity() {
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seek: SeekBar,
                                            progress: Int, fromUser: Boolean) {
+
                 updateDiceVisibility(seek.progress)
+                diceViewModel.diceListFragment.setDiceAmount(seek.progress)
             }
 
             override fun onStartTrackingTouch(seek: SeekBar) {
@@ -105,8 +104,11 @@ class DiceActivity : BasicActivity() {
 
     //region OnClick Methods
     private fun onClickRoll(){
+
         // set dices
-        diceViewModel.performRoll(allDices)
+        //diceViewModel.performRoll(allDices)
+
+        diceViewModel.roll()
         Log.d(TAG, "Roll")
 
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -127,10 +129,10 @@ class DiceActivity : BasicActivity() {
 
     //endregion
 
-    private fun updateDiceVisibility(diceAmount:Int){
+    private fun updateDiceVisibility(diceAmount:Int) {
 
-        diceViewModel.updateDiceVisibility(allDices, diceAmount)
-
+        //diceViewModel.updateDiceVisibility(allDices, diceAmount)
+        diceViewModel.currentDiceAmount = diceAmount
         val currentDiceAmount = diceViewModel.currentDiceAmount
         tvDiceCount.text = currentDiceAmount.toString()
         seekBarDiceAmount.progress = currentDiceAmount

@@ -82,15 +82,23 @@
         android:layout_centerHorizontal="true"
         android:text="Roll" />
 
+
     <LinearLayout
         android:id="@+id/layoutDices"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="382dp"
+        android:layout_height="646dp"
         android:layout_below="@+id/layout1"
         android:layout_marginTop="20dp"
         android:background="@color/magenta"
         android:orientation="vertical">
 
+        <FrameLayout
+            android:id="@+id/diceFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+        <!--
         <LinearLayout
             android:id="@+id/diceRow1"
             android:layout_width="wrap_content"
@@ -211,6 +219,8 @@
                 android:src="@drawable/dice1" />
 
         </LinearLayout>
+        -->
+
 
     </LinearLayout>
 

@@ -4,7 +4,9 @@ import java.io.Serializable
 import java.lang.StringBuilder
 import java.util.ArrayList
 
-class DiceRollLog(val dices: ArrayList<Int>) : Serializable {
+data class DiceRollLog(val dices: ArrayList<Int>) : Serializable {
+
+
     val diceAmount: Int
         get() = dices.size
 
