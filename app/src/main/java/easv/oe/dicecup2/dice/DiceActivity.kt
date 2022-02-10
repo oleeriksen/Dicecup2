@@ -2,6 +2,7 @@ package easv.oe.dicecup2.dice
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
+import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -10,20 +11,17 @@ import android.widget.SeekBar
 import androidx.lifecycle.ViewModelProvider
 import easv.oe.dicecup2.BasicActivity
 import easv.oe.dicecup2.R
-import easv.oe.dicecup2.Utils
 import kotlinx.android.synthetic.main.activity_dice.*
-import kotlinx.android.synthetic.main.roll.view.*
 
 private const val TAG = "DiceActivity"
+private const val KEY_INDEX = "index"
 
 
 class DiceActivity : BasicActivity() {
 
     //region Vars and vals
-
-    private var currentDiceAmount: Int = 2
-    private lateinit var utils: Utils
     private lateinit var allDices: List<ImageView>
+    private val orientation: Int by lazy { resources.configuration.orientation }
 
     private val diceViewModel :DiceViewModel by lazy {
         ViewModelProvider(this).get(DiceViewModel::class.java)
@@ -33,23 +31,33 @@ class DiceActivity : BasicActivity() {
         diceViewModel.diceHistoryManager
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.i(TAG, "onSaveInstanceState")
+        outState.putSerializable(KEY_INDEX, diceViewModel.diceHistoryManager)
+    }
+
 
     //endregion
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dice)
         Log.d(TAG, "OnCreate(Bundle?) called")
+        setContentView(R.layout.activity_dice)
 
 
-        val orientation = resources.configuration.orientation
+        if(savedInstanceState?.getSerializable(KEY_INDEX) != null) {
+                diceViewModel.diceHistoryManager = savedInstanceState.getSerializable(KEY_INDEX) as DiceHistoryManager
+            }
+
+
+
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             supportActionBar?.hide()
         } else {
             // In portrait
         }
 
-        utils = Utils()
         allDices = listOf(imgDice1, imgDice2, imgDice3, imgDice4, imgDice5, imgDice6, imgDice7, imgDice8, imgDice9)
 
         diceViewModel.updateDiceFromHistory(allDices)
@@ -61,7 +69,7 @@ class DiceActivity : BasicActivity() {
 
     private fun addListeners() {
 
-        val orientation = resources.configuration.orientation
+
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             btnStory.setOnClickListener { onCLickStory() }
         }else{
@@ -101,7 +109,6 @@ class DiceActivity : BasicActivity() {
         diceViewModel.performRoll(allDices)
         Log.d(TAG, "Roll")
 
-        val orientation = resources.configuration.orientation
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             historyview.removeAllViews()
             for (history in diceHistoryManager.historyList) {

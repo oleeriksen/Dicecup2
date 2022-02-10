@@ -22,12 +22,11 @@ class DiceViewModel : ViewModel() {
         Utils()
     }
 
-    val diceHistoryManager :DiceHistoryManager by lazy {
-        DiceHistoryManager()
-    }
+    var diceHistoryManager :DiceHistoryManager
 
     init {
         Log.d(TAG, "ViewModel instance created")
+        diceHistoryManager = DiceHistoryManager();
     }
 
     override fun onCleared() {
