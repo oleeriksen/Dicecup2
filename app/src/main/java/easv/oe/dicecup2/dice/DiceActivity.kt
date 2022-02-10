@@ -140,4 +140,41 @@ class DiceActivity : BasicActivity() {
         v.addView(view)
     }
 
+    private fun addXAmountOfDices(numberOfDices:Int) {
+        var dices = numberOfDices
+        val layout1 = diceRow1
+        val layout2 = diceRow2
+        val layout3 = diceRow2
+
+        if(dices >= 7){
+            for (i in 1..numberOfDices-6){
+                addDiceToThisLayout(layout3)
+            }
+            dices = 6
+        }
+
+        if(dices in 4..6){
+            for (i in 4..dices){
+                addDiceToThisLayout(layout2)
+            }
+            dices = 3
+        }
+
+        if(dices <= 3) {
+            for (i in 1..dices) {
+                addDiceToThisLayout(layout1)
+            }
+        }
+
+    }
+
+    private fun addDiceToThisLayout(layout: LinearLayout){
+        val dice = ImageView(this)
+        dice.adjustViewBounds = true
+        dice.maxWidth = 100
+        dice.scaleType = ImageView.ScaleType.CENTER_INSIDE
+        dice.setImageResource(R.drawable.dice1)
+        layout.addView(dice)
+    }
+
 }
