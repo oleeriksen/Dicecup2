@@ -60,8 +60,9 @@ class DiceActivity : BasicActivity() {
 
         allDices = listOf(imgDice1, imgDice2, imgDice3, imgDice4, imgDice5, imgDice6, imgDice7, imgDice8, imgDice9)
 
-        diceViewModel.updateDiceFromHistory(allDices)
-        updateDiceVisibility(diceViewModel.currentDiceAmount)
+        diceViewModel.updateDiceFromHistory(allGeneratedDices)
+        addXAmountOfDices(diceViewModel.currentDiceAmount)
+        //updateDiceVisibility(diceViewModel.currentDiceAmount)
         addListeners()
     }
 
@@ -88,7 +89,8 @@ class DiceActivity : BasicActivity() {
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seek: SeekBar,
                                            progress: Int, fromUser: Boolean) {
-                updateDiceVisibility(seek.progress)
+                layoutDices.removeAllViews()
+                addXAmountOfDices(seek.progress)
             }
 
             override fun onStartTrackingTouch(seek: SeekBar) {
@@ -106,7 +108,7 @@ class DiceActivity : BasicActivity() {
     //region OnClick Methods
     private fun onClickRoll(){
         // set dices
-        diceViewModel.performRoll(allDices)
+        diceViewModel.performRoll(allGeneratedDices)
         Log.d(TAG, "Roll")
 
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -129,7 +131,7 @@ class DiceActivity : BasicActivity() {
 
     private fun updateDiceVisibility(diceAmount:Int){
 
-        diceViewModel.updateDiceVisibility(allDices, diceAmount)
+        diceViewModel.updateDiceVisibility(allGeneratedDices, diceAmount)
 
         val currentDiceAmount = diceViewModel.currentDiceAmount
         tvDiceCount.text = currentDiceAmount.toString()
@@ -148,33 +150,45 @@ class DiceActivity : BasicActivity() {
     }
 
     private fun addXAmountOfDices(numberOfDices:Int) {
-        if(numberOfDices > 0){
+        updateDiceVisibility(numberOfDices)
+        var dices: List<ImageView> = emptyList()
+        if(numberOfDices < 4){
             val layout1 = LinearLayout(this)
             layoutDices.addView(layout1)
-            for (i in 1..3){
-                allGeneratedDices += listOf(addDiceToThisLayout(layout1))
+            for (i in 1..numberOfDices){
+                dices += listOf(addDiceToThisLayout(layout1))
                 println("Layout 1 $i")
             }
-        }
-        if(numberOfDices > 3){
-            val layout2 = LinearLayout(this)
-            layoutDices.addView(layout2)
-            for (i in 1.. (numberOfDices - 3)){
-                allGeneratedDices += listOf(addDiceToThisLayout(layout2))
-                var j = i+3
-                println("Layout 2 $j")
-                if(i >= 3)
-                    break
+        }else {
+            if (numberOfDices > 0) {
+                val layout1 = LinearLayout(this)
+                layoutDices.addView(layout1)
+                for (i in 1..3) {
+                    dices += listOf(addDiceToThisLayout(layout1))
+                    println("Layout 1 $i")
+                }
+            }
+            if (numberOfDices > 3) {
+                val layout2 = LinearLayout(this)
+                layoutDices.addView(layout2)
+                for (i in 1..(numberOfDices - 3)) {
+                    dices += listOf(addDiceToThisLayout(layout2))
+                    var j = i + 3
+                    println("Layout 2 $j")
+                    if (i >= 3)
+                        break
+                }
+            }
+            if (numberOfDices > 6) {
+                val layout3 = LinearLayout(this)
+                layoutDices.addView(layout3)
+                for (i in 7..numberOfDices) {
+                    dices += listOf(addDiceToThisLayout(layout3))
+                    println("Layout 3 $i")
+                }
             }
         }
-        if (numberOfDices > 6){
-            val layout3 = LinearLayout(this)
-            layoutDices.addView(layout3)
-            for (i in 7..numberOfDices){
-                allGeneratedDices += listOf(addDiceToThisLayout(layout3))
-                println("Layout 3 $i")
-            }
-        }
+        allGeneratedDices = dices
     }
 
     private fun addDiceToThisLayout(layout: LinearLayout): ImageView {
