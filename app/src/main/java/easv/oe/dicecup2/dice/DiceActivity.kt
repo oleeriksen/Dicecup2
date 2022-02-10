@@ -101,8 +101,17 @@ class DiceActivity : BasicActivity() {
     //region OnClick Methods
     private fun onClickRoll(){
         // set dices
-        updateDices()
+        diceViewModel.performRoll(allDices)
         Log.d(TAG, "Roll")
+
+        val orientation = resources.configuration.orientation
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            historyview.removeAllViews()
+            for (history in diceHistoryManager.historyList) {
+                addCustomUI(history, historyview)
+            }
+        }
+
     }
 
     private fun onCLickStory(){
@@ -132,32 +141,6 @@ class DiceActivity : BasicActivity() {
                 dice.visibility = View.INVISIBLE
             }
             i += 1
-        }
-    }
-
-    private fun updateDices() {
-
-
-        val diceRolls = ArrayList<Int>()
-
-        var i = 1
-        for(dice in allDices){
-            if(dice.visibility == View.VISIBLE) {
-                val ranNum = utils.getRandomInt(1, 6)
-                dice.setImageResource(diceViewModel.getDiceImages()[ranNum])
-                diceRolls.add(ranNum)
-            }
-            i += 1
-        }
-
-        diceHistoryManager.addToHistory(DiceRollLog(diceRolls))
-
-        val orientation = resources.configuration.orientation
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            historyview.removeAllViews()
-            for (history in diceHistoryManager.historyList) {
-                addCustomUI(history, historyview)
-            }
         }
     }
 

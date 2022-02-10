@@ -1,6 +1,8 @@
 package easv.oe.dicecup2.dice
 
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
 import androidx.lifecycle.ViewModel
 import easv.oe.dicecup2.Utils
 
@@ -32,8 +34,22 @@ class DiceViewModel : ViewModel() {
         return diceImages
     }
 
+    fun performRoll(allDices: List<ImageView>) {
+        val diceRolls = ArrayList<Int>()
 
+        var i = 1
+        for(dice in allDices){
+            if(dice.visibility == View.VISIBLE) {
+                val ranNum = utils.getRandomInt(1, 6)
+                dice.setImageResource(diceImages[ranNum])
+                diceRolls.add(ranNum)
+            }
+            i += 1
+        }
 
+        diceHistoryManager.addToHistory(DiceRollLog(diceRolls))
+
+    }
 
 
 }
