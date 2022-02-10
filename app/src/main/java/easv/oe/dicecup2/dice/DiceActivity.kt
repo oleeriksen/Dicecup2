@@ -1,35 +1,40 @@
 package easv.oe.dicecup2.dice
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
-import android.view.OrientationEventListener
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.SeekBar
+import androidx.lifecycle.ViewModelProvider
 import easv.oe.dicecup2.BasicActivity
 import easv.oe.dicecup2.R
 import easv.oe.dicecup2.Utils
 import kotlinx.android.synthetic.main.activity_dice.*
-import kotlinx.android.synthetic.main.activity_story.*
 import kotlinx.android.synthetic.main.roll.view.*
+
+private const val TAG = "DiceActivity"
+
 
 class DiceActivity : BasicActivity() {
 
     //region Vars and vals
 
-
-    private val TAG: String = "xyz"
     private var currentDiceAmount: Int = 2
-    private lateinit var diceHistory: DiceHistoryManager
-    private lateinit var diceManager: DiceManager
     private lateinit var utils: Utils
     private lateinit var allDices: List<ImageView>
+
+    private val diceViewModel :DiceViewModel by lazy {
+        ViewModelProvider(this).get(DiceViewModel::class.java)
+    }
+
+    private val diceHistoryManager: DiceHistoryManager by lazy{
+        diceViewModel.diceHistoryManager
+    }
 
 
     //endregion
@@ -37,11 +42,8 @@ class DiceActivity : BasicActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dice)
-        Log.d(TAG, "OnCreate")
+        Log.d(TAG, "OnCreate(Bundle?) called")
 
-
-        diceManager = DiceManager()
-        diceHistory = DiceHistoryManager()
 
         val orientation = resources.configuration.orientation
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -49,13 +51,12 @@ class DiceActivity : BasicActivity() {
         } else {
             // In portrait
         }
+
         utils = Utils()
-        diceHistory = DiceHistoryManager()
-        diceManager = DiceManager()
         allDices = listOf(imgDice1, imgDice2, imgDice3, imgDice4, imgDice5, imgDice6, imgDice7, imgDice8, imgDice9)
 
-        updateDiceVisibility(currentDiceAmount)
-
+        updateDiceFromHistory()
+        //updateDiceVisibility(currentDiceAmount)
         addListeners()
     }
 
@@ -67,7 +68,7 @@ class DiceActivity : BasicActivity() {
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             btnStory.setOnClickListener { onCLickStory() }
         }else{
-            for (history in diceHistory.historyList){
+            for (history in diceHistoryManager.getHistoryList()){
                 addCustomUI(history, historyview)
             }
         }
@@ -106,11 +107,8 @@ class DiceActivity : BasicActivity() {
 
     private fun onCLickStory(){
 
-        val dsa = DiceStoryActivity()
-        val intent = Intent(this, dsa::class.java)
-        intent.putExtra("h", diceHistory)
+        val intent = DiceStoryActivity.newIntent(this, diceHistoryManager)
         startActivity(intent)
-
 
     }
 
@@ -146,23 +144,35 @@ class DiceActivity : BasicActivity() {
         for(dice in allDices){
             if(dice.visibility == View.VISIBLE) {
                 val ranNum = utils.getRandomInt(1, 6)
-                dice.setImageResource(diceManager.diceImages[ranNum])
+                dice.setImageResource(diceViewModel.getDiceImages()[ranNum])
                 diceRolls.add(ranNum)
             }
             i += 1
         }
 
-        diceHistory.addToHistory(DiceRollLog(diceRolls))
+        diceHistoryManager.addToHistory(DiceRollLog(diceRolls))
 
         val orientation = resources.configuration.orientation
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            historyview.removeAllViews();
-            for (history in diceHistory.historyList) {
+            historyview.removeAllViews()
+            for (history in diceHistoryManager.historyList) {
                 addCustomUI(history, historyview)
             }
         }
     }
 
+    private fun updateDiceFromHistory() {
+        if(diceHistoryManager.historyList.isNotEmpty()){
+            val lastRoll =diceHistoryManager.historyList[diceHistoryManager.historyList.size-1]
+            updateDiceVisibility(lastRoll.diceAmount)
+            for((i, dice) in lastRoll.dices.withIndex()){
+                allDices[i].setImageResource(diceViewModel.getDiceImages()[dice])
+            }
+        }
+        else {
+            updateDiceVisibility(currentDiceAmount)
+        }
+    }
 
     @SuppressLint("ResourceAsColor")
     fun addCustomUI(rollLog: DiceRollLog, v: LinearLayout){
@@ -177,7 +187,7 @@ class DiceActivity : BasicActivity() {
         for((i, dice) in allDices.withIndex()){
             if(i<rollLog.diceAmount){
                 dice.visibility = View.VISIBLE
-                allDices[i].setImageResource(diceManager.diceImages[rollLog.dices[i]])
+                allDices[i].setImageResource(diceViewModel.getDiceImages()[rollLog.dices[i]])
             }
             else{
                 dice.visibility = View.GONE

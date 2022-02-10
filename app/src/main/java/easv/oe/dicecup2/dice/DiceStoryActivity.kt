@@ -1,28 +1,40 @@
 package easv.oe.dicecup2.dice
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
 import easv.oe.dicecup2.BasicActivity
 import easv.oe.dicecup2.R
 import kotlinx.android.synthetic.main.activity_story.*
 import kotlinx.android.synthetic.main.roll.view.*
 
+private const val INTENT_EXTRA_DiceHistoryManager = "diceStoryActivity_intentExtra_HistoryManager"
+
+private const val TAG = "DiceStoryActivity"
 class DiceStoryActivity() : BasicActivity() {
 
-    lateinit var diceManager: DiceManager
-    lateinit var diceHistoryManager : DiceHistoryManager
-    //var diceHistoryManager = historyManager
+
+    private val diceStoryViewModel:DiceStoryViewModel by lazy {
+        ViewModelProvider(this).get(DiceStoryViewModel::class.java)
+    }
+
+    private lateinit var diceHistoryManager : DiceHistoryManager
+
+
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_story)
+        Log.d(TAG, "OnCreate(Bundle?) called")
 
-        diceManager = DiceManager()
-        diceHistoryManager = intent.getSerializableExtra("h") as DiceHistoryManager
+        diceHistoryManager = intent.getSerializableExtra(INTENT_EXTRA_DiceHistoryManager) as DiceHistoryManager
 
 
         for (history in diceHistoryManager.historyList){
@@ -30,6 +42,13 @@ class DiceStoryActivity() : BasicActivity() {
         }
 
         back.setOnClickListener{ onClickBack()}
+    }
+
+    companion object {
+        fun newIntent(packageContext: Context, dHM: DiceHistoryManager) : Intent {
+            return Intent(packageContext, DiceStoryActivity:: class.java).apply {
+                putExtra(INTENT_EXTRA_DiceHistoryManager, dHM) }
+        }
     }
 
 
@@ -49,7 +68,7 @@ class DiceStoryActivity() : BasicActivity() {
         for((i, dice) in allDices.withIndex()){
             if(i<rollLog.diceAmount){
                 dice.visibility = View.VISIBLE
-                allDices[i].setImageResource(diceManager.diceImages[rollLog.dices[i]])
+                allDices[i].setImageResource(diceStoryViewModel.diceImageManager.diceImages[rollLog.dices[i]])
             }
             else{
                 dice.visibility = View.GONE
