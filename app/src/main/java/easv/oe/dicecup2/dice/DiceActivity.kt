@@ -2,11 +2,8 @@ package easv.oe.dicecup2.dice
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
-import android.graphics.Color
-import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.SeekBar
@@ -55,8 +52,8 @@ class DiceActivity : BasicActivity() {
         utils = Utils()
         allDices = listOf(imgDice1, imgDice2, imgDice3, imgDice4, imgDice5, imgDice6, imgDice7, imgDice8, imgDice9)
 
-        updateDiceFromHistory()
-        //updateDiceVisibility(currentDiceAmount)
+        diceViewModel.updateDiceFromHistory(allDices)
+        updateDiceVisibility(diceViewModel.currentDiceAmount)
         addListeners()
     }
 
@@ -68,8 +65,8 @@ class DiceActivity : BasicActivity() {
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             btnStory.setOnClickListener { onCLickStory() }
         }else{
-            for (history in diceHistoryManager.getHistoryList()){
-                addCustomUI(history, historyview)
+            for (history in diceHistoryManager.historyList){
+                addRollToHistoryUI(history, historyview)
             }
         }
         btnRoll.setOnClickListener { onClickRoll() }
@@ -108,7 +105,7 @@ class DiceActivity : BasicActivity() {
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             historyview.removeAllViews()
             for (history in diceHistoryManager.historyList) {
-                addCustomUI(history, historyview)
+                addRollToHistoryUI(history, historyview)
             }
         }
 
@@ -123,60 +120,24 @@ class DiceActivity : BasicActivity() {
 
     //endregion
 
-    //region dice methods
-
     private fun updateDiceVisibility(diceAmount:Int){
 
-        currentDiceAmount = diceAmount
+        diceViewModel.updateDiceVisibility(allDices, diceAmount)
+
+        val currentDiceAmount = diceViewModel.currentDiceAmount
         tvDiceCount.text = currentDiceAmount.toString()
-        seekBarDiceAmount.progress = diceAmount
+        seekBarDiceAmount.progress = currentDiceAmount
 
-
-        var i = 1
-        for(dice in allDices){
-            if(i <= diceAmount){
-                dice.visibility = View.VISIBLE
-            }
-            else{
-                dice.visibility = View.INVISIBLE
-            }
-            i += 1
-        }
     }
 
-    private fun updateDiceFromHistory() {
-        if(diceHistoryManager.historyList.isNotEmpty()){
-            val lastRoll =diceHistoryManager.historyList[diceHistoryManager.historyList.size-1]
-            updateDiceVisibility(lastRoll.diceAmount)
-            for((i, dice) in lastRoll.dices.withIndex()){
-                allDices[i].setImageResource(diceViewModel.getDiceImages()[dice])
-            }
-        }
-        else {
-            updateDiceVisibility(currentDiceAmount)
-        }
-    }
 
     @SuppressLint("ResourceAsColor")
-    fun addCustomUI(rollLog: DiceRollLog, v: LinearLayout){
+    fun addRollToHistoryUI(rollLog: DiceRollLog, v: LinearLayout){
+
         val view = layoutInflater.inflate(R.layout.roll, null)
-        val allDices = listOf(view.dice1, view.dice2, view.dice3, view.dice4, view.dice5, view.dice6, view.dice7, view.dice8, view.dice9)
 
-        view.txtRollText.text = rollLog.diceAmountString
-        view.txtRollText.setTypeface(null, Typeface.BOLD)
-        view.txtRollText.setTextColor(Color.WHITE)
-
-        //For each dice, if the dice has an index lower than the total amount of dices in the current diceRollLog, the dice will be shown with an image;
-        for((i, dice) in allDices.withIndex()){
-            if(i<rollLog.diceAmount){
-                dice.visibility = View.VISIBLE
-                allDices[i].setImageResource(diceViewModel.getDiceImages()[rollLog.dices[i]])
-            }
-            else{
-                dice.visibility = View.GONE
-            }
-        }
+        diceViewModel.addDiceRollToView(view, rollLog)
         v.addView(view)
     }
-    //endregion
+
 }

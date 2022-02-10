@@ -7,6 +7,7 @@ import java.util.ArrayList
 class DiceRollLog(val dices: ArrayList<Int>) : Serializable {
     val diceAmount: Int
         get() = dices.size
+
     val diceAmountString: String
         get() = "Amount of rolled dice: $diceAmount"
 
