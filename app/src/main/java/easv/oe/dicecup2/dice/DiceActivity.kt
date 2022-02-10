@@ -2,7 +2,6 @@ package easv.oe.dicecup2.dice
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
-import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -21,6 +20,7 @@ class DiceActivity : BasicActivity() {
 
     //region Vars and vals
     private lateinit var allDices: List<ImageView>
+    private var allGeneratedDices: List<ImageView> = emptyList()
     private val orientation: Int by lazy { resources.configuration.orientation }
 
     private val diceViewModel :DiceViewModel by lazy {
@@ -148,40 +148,43 @@ class DiceActivity : BasicActivity() {
     }
 
     private fun addXAmountOfDices(numberOfDices:Int) {
-        var dices = numberOfDices
-        val layout1 = diceRow1
-        val layout2 = diceRow2
-        val layout3 = diceRow2
-
-        if(dices >= 7){
-            for (i in 1..numberOfDices-6){
-                addDiceToThisLayout(layout3)
-            }
-            dices = 6
-        }
-
-        if(dices in 4..6){
-            for (i in 4..dices){
-                addDiceToThisLayout(layout2)
-            }
-            dices = 3
-        }
-
-        if(dices <= 3) {
-            for (i in 1..dices) {
-                addDiceToThisLayout(layout1)
+        if(numberOfDices > 0){
+            val layout1 = LinearLayout(this)
+            layoutDices.addView(layout1)
+            for (i in 1..3){
+                allGeneratedDices += listOf(addDiceToThisLayout(layout1))
+                println("Layout 1 $i")
             }
         }
-
+        if(numberOfDices > 3){
+            val layout2 = LinearLayout(this)
+            layoutDices.addView(layout2)
+            for (i in 1.. (numberOfDices - 3)){
+                allGeneratedDices += listOf(addDiceToThisLayout(layout2))
+                var j = i+3
+                println("Layout 2 $j")
+                if(i >= 3)
+                    break
+            }
+        }
+        if (numberOfDices > 6){
+            val layout3 = LinearLayout(this)
+            layoutDices.addView(layout3)
+            for (i in 7..numberOfDices){
+                allGeneratedDices += listOf(addDiceToThisLayout(layout3))
+                println("Layout 3 $i")
+            }
+        }
     }
 
-    private fun addDiceToThisLayout(layout: LinearLayout){
+    private fun addDiceToThisLayout(layout: LinearLayout): ImageView {
         val dice = ImageView(this)
         dice.adjustViewBounds = true
         dice.maxWidth = 100
         dice.scaleType = ImageView.ScaleType.CENTER_INSIDE
         dice.setImageResource(R.drawable.dice1)
         layout.addView(dice)
+        return dice;
     }
 
 }
