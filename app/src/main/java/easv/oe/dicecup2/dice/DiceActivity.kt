@@ -46,13 +46,14 @@ class DiceActivity : BasicActivity() {
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             supportActionBar?.hide()
         } else {
-            val currentFragment = supportFragmentManager.findFragmentById(R.id.diceFragment)
-
-            if(currentFragment == null){
-                diceViewModel.diceListFragment  = DiceListFragment.newInstance()
-                supportFragmentManager.beginTransaction().add(R.id.diceFragment, diceViewModel.diceListFragment).commit()
-            }
             // In portrait
+        }
+
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.diceFragment)
+
+        if(currentFragment == null){
+            diceViewModel.diceListFragment  = DiceListFragment.newInstance()
+            supportFragmentManager.beginTransaction().add(R.id.diceFragment, diceViewModel.diceListFragment).commit()
         }
 
         //allDices = listOf(imgDice1, imgDice2, imgDice3, imgDice4, imgDice5, imgDice6, imgDice7, imgDice8, imgDice9)

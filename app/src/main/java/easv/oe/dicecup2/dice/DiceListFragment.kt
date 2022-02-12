@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import easv.oe.dicecup2.R
+import kotlin.math.sqrt
 
 private const val TAG = "DiceListFragment"
 class DiceListFragment: Fragment() {
@@ -37,7 +38,11 @@ class DiceListFragment: Fragment() {
         val view = inflater.inflate(R.layout.fragment_dice_list, container, false)
 
         diceRecyclerView = view.findViewById(R.id.dice_recycler_view) as RecyclerView
-        diceRecyclerView.layoutManager = GridLayoutManager(context, 3)
+        var layoutCol = 3
+        if(sqrt(diceListViewModel.currentDiceAmount.toDouble()).toInt() > 3){
+            layoutCol = sqrt(diceListViewModel.currentDiceAmount.toDouble()).toInt();
+        }
+        diceRecyclerView.layoutManager = GridLayoutManager(context, layoutCol)
 
         updateUI()
 
