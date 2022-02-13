@@ -12,4 +12,7 @@
     <item
         android:id="@+id/MainMenuCalculator"
         android:title="Calculator" />
+    <item
+        android:id="@+id/TicTacToe"
+        android:title="Tic Tac Toe" />
 </menu>

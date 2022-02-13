@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import easv.oe.dicecup2.calculator.CalculatorActivity
 import easv.oe.dicecup2.dice.DiceActivity
 import easv.oe.dicecup2.greetings.WelcomeActivity
+import easv.oe.dicecup2.ticTacToe.TicTacToeActivity
 
 /**
  * Implements the thing all the basic activities need (i.e Main menu)
@@ -42,6 +43,11 @@ open class BasicActivity : AppCompatActivity() {
             }
             R.id.MainMenuCalculator -> {
                 val intent = Intent(this, CalculatorActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.TicTacToe -> {
+                val intent = Intent(this, TicTacToeActivity:: class.java)
                 startActivity(intent)
                 true
             }
