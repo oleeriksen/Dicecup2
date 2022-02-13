@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import androidx.lifecycle.ViewModelProvider
@@ -13,15 +12,13 @@ import easv.oe.dicecup2.R
 import kotlinx.android.synthetic.main.activity_dice.*
 
 private const val TAG = "DiceActivity"
-private const val KEY_INDEX = "index"
 
 
 class DiceActivity : BasicActivity() {
 
     //region Vars and vals
-    private lateinit var allDices: List<ImageView>
-    private var allGeneratedDices: List<ImageView> = emptyList()
     private val orientation: Int by lazy { resources.configuration.orientation }
+
 
     private val diceViewModel :DiceViewModel by lazy {
         ViewModelProvider(this).get(DiceViewModel::class.java)
@@ -31,40 +28,57 @@ class DiceActivity : BasicActivity() {
         diceViewModel.diceHistoryManager
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.i(TAG, "onSaveInstanceState")
-        outState.putSerializable(KEY_INDEX, diceViewModel.diceHistoryManager)
-    }
-
 
     //endregion
+
+    //region override
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "OnCreate(Bundle?) called")
         setContentView(R.layout.activity_dice)
 
+        setupOrientation()
+        setupFragments()
+        addListeners()
 
-        if(savedInstanceState?.getSerializable(KEY_INDEX) != null) {
-                diceViewModel.diceHistoryManager = savedInstanceState.getSerializable(KEY_INDEX) as DiceHistoryManager
-            }
+        loadDice()
 
+    }
 
+    override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        super.onSaveInstanceState(savedInstanceState)
+        Log.i(TAG, "onSaveInstanceState")
 
+    }
+    //endregion
+
+    //region setup orientation
+
+    private fun setupOrientation() {
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             supportActionBar?.hide()
         } else {
             // In portrait
         }
-
-        allDices = listOf(imgDice1, imgDice2, imgDice3, imgDice4, imgDice5, imgDice6, imgDice7, imgDice8, imgDice9)
-
-        diceViewModel.updateDiceFromHistory(allGeneratedDices)
-        addXAmountOfDices(diceViewModel.currentDiceAmount)
-        //updateDiceVisibility(diceViewModel.currentDiceAmount)
-        addListeners()
     }
+    //endregion
+
+    //region setup fragments
+
+    private fun setupFragments() {
+        val currentDiceListFragment = supportFragmentManager.findFragmentById(R.id.diceFragment)
+        if(currentDiceListFragment == null) {
+            diceViewModel.diceListFragment = DiceListFragment.newInstance()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.diceFragment, diceViewModel.diceListFragment).commit()
+        }
+        else{
+            diceViewModel.diceListFragment = currentDiceListFragment as DiceListFragment
+        }
+    }
+
+    //endregion
 
     //region Setup Listeners
 
@@ -79,8 +93,6 @@ class DiceActivity : BasicActivity() {
             }
         }
         btnRoll.setOnClickListener { onClickRoll() }
-
-
         seekBarDiceAmount.setOnSeekBarChangeListener(diceAmountSetupListener())
     }
 
@@ -89,8 +101,9 @@ class DiceActivity : BasicActivity() {
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seek: SeekBar,
                                            progress: Int, fromUser: Boolean) {
-                layoutDices.removeAllViews()
-                addXAmountOfDices(seek.progress)
+
+                updateDiceVisibility(seek.progress)
+                diceViewModel.diceListFragment.setDiceAmount(seek.progress)
             }
 
             override fun onStartTrackingTouch(seek: SeekBar) {
@@ -107,8 +120,10 @@ class DiceActivity : BasicActivity() {
 
     //region OnClick Methods
     private fun onClickRoll(){
+
         // set dices
-        diceViewModel.performRoll(allGeneratedDices)
+
+        diceViewModel.roll()
         Log.d(TAG, "Roll")
 
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -129,15 +144,22 @@ class DiceActivity : BasicActivity() {
 
     //endregion
 
-    private fun updateDiceVisibility(diceAmount:Int){
+    //region Dice
 
-        diceViewModel.updateDiceVisibility(allGeneratedDices, diceAmount)
+    private fun loadDice() {
+        diceViewModel.updateFragmentDiceFromHistory()
+        updateDiceVisibility(diceViewModel.currentDiceAmount)
+    }
 
+    private fun updateDiceVisibility(diceAmount:Int) {
+        diceViewModel.currentDiceAmount = diceAmount
         val currentDiceAmount = diceViewModel.currentDiceAmount
         tvDiceCount.text = currentDiceAmount.toString()
         seekBarDiceAmount.progress = currentDiceAmount
 
     }
+
+    //endregion
 
 
     @SuppressLint("ResourceAsColor")
@@ -147,58 +169,6 @@ class DiceActivity : BasicActivity() {
 
         diceViewModel.addDiceRollToView(view, rollLog)
         v.addView(view)
-    }
-
-    private fun addXAmountOfDices(numberOfDices:Int) {
-        updateDiceVisibility(numberOfDices)
-        var dices: List<ImageView> = emptyList()
-        if(numberOfDices < 4){
-            val layout1 = LinearLayout(this)
-            layoutDices.addView(layout1)
-            for (i in 1..numberOfDices){
-                dices += listOf(addDiceToThisLayout(layout1))
-                println("Layout 1 $i")
-            }
-        }else {
-            if (numberOfDices > 0) {
-                val layout1 = LinearLayout(this)
-                layoutDices.addView(layout1)
-                for (i in 1..3) {
-                    dices += listOf(addDiceToThisLayout(layout1))
-                    println("Layout 1 $i")
-                }
-            }
-            if (numberOfDices > 3) {
-                val layout2 = LinearLayout(this)
-                layoutDices.addView(layout2)
-                for (i in 1..(numberOfDices - 3)) {
-                    dices += listOf(addDiceToThisLayout(layout2))
-                    var j = i + 3
-                    println("Layout 2 $j")
-                    if (i >= 3)
-                        break
-                }
-            }
-            if (numberOfDices > 6) {
-                val layout3 = LinearLayout(this)
-                layoutDices.addView(layout3)
-                for (i in 7..numberOfDices) {
-                    dices += listOf(addDiceToThisLayout(layout3))
-                    println("Layout 3 $i")
-                }
-            }
-        }
-        allGeneratedDices = dices
-    }
-
-    private fun addDiceToThisLayout(layout: LinearLayout): ImageView {
-        val dice = ImageView(this)
-        dice.adjustViewBounds = true
-        dice.maxWidth = 100
-        dice.scaleType = ImageView.ScaleType.CENTER_INSIDE
-        dice.setImageResource(R.drawable.dice1)
-        layout.addView(dice)
-        return dice;
     }
 
 }
