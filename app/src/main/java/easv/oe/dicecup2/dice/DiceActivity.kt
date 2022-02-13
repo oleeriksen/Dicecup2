@@ -17,7 +17,6 @@ private const val TAG = "DiceActivity"
 class DiceActivity : BasicActivity() {
 
     //region Vars and vals
-    //private lateinit var allDices: List<ImageView>
     private val orientation: Int by lazy { resources.configuration.orientation }
 
 
@@ -29,39 +28,57 @@ class DiceActivity : BasicActivity() {
         diceViewModel.diceHistoryManager
     }
 
-    override fun onSaveInstanceState(savedInstanceState: Bundle) {
-        super.onSaveInstanceState(savedInstanceState)
-        Log.i(TAG, "onSaveInstanceState")
-
-    }
-
 
     //endregion
+
+    //region override
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "OnCreate(Bundle?) called")
         setContentView(R.layout.activity_dice)
 
+        setupOrientation()
+        setupFragments()
+        addListeners()
+
+        loadDice()
+
+    }
+
+    override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        super.onSaveInstanceState(savedInstanceState)
+        Log.i(TAG, "onSaveInstanceState")
+
+    }
+    //endregion
+
+    //region setup orientation
+
+    private fun setupOrientation() {
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             supportActionBar?.hide()
         } else {
             // In portrait
         }
-
-        val currentFragment = supportFragmentManager.findFragmentById(R.id.diceFragment)
-
-        if(currentFragment == null){
-            diceViewModel.diceListFragment  = DiceListFragment.newInstance()
-            supportFragmentManager.beginTransaction().add(R.id.diceFragment, diceViewModel.diceListFragment).commit()
-        }
-
-        //allDices = listOf(imgDice1, imgDice2, imgDice3, imgDice4, imgDice5, imgDice6, imgDice7, imgDice8, imgDice9)
-
-        //diceViewModel.updateDiceFromHistory(allDices)
-        updateDiceVisibility(2)
-        addListeners()
     }
+    //endregion
+
+    //region setup fragments
+
+    private fun setupFragments() {
+        val currentDiceListFragment = supportFragmentManager.findFragmentById(R.id.diceFragment)
+        if(currentDiceListFragment == null) {
+            diceViewModel.diceListFragment = DiceListFragment.newInstance()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.diceFragment, diceViewModel.diceListFragment).commit()
+        }
+        else{
+            diceViewModel.diceListFragment = currentDiceListFragment as DiceListFragment
+        }
+    }
+
+    //endregion
 
     //region Setup Listeners
 
@@ -76,8 +93,6 @@ class DiceActivity : BasicActivity() {
             }
         }
         btnRoll.setOnClickListener { onClickRoll() }
-
-
         seekBarDiceAmount.setOnSeekBarChangeListener(diceAmountSetupListener())
     }
 
@@ -107,7 +122,6 @@ class DiceActivity : BasicActivity() {
     private fun onClickRoll(){
 
         // set dices
-        //diceViewModel.performRoll(allDices)
 
         diceViewModel.roll()
         Log.d(TAG, "Roll")
@@ -130,15 +144,22 @@ class DiceActivity : BasicActivity() {
 
     //endregion
 
-    private fun updateDiceVisibility(diceAmount:Int) {
+    //region Dice
 
-        //diceViewModel.updateDiceVisibility(allDices, diceAmount)
+    private fun loadDice() {
+        diceViewModel.updateFragmentDiceFromHistory()
+        updateDiceVisibility(diceViewModel.currentDiceAmount)
+    }
+
+    private fun updateDiceVisibility(diceAmount:Int) {
         diceViewModel.currentDiceAmount = diceAmount
         val currentDiceAmount = diceViewModel.currentDiceAmount
         tvDiceCount.text = currentDiceAmount.toString()
         seekBarDiceAmount.progress = currentDiceAmount
 
     }
+
+    //endregion
 
 
     @SuppressLint("ResourceAsColor")

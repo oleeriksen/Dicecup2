@@ -9,6 +9,8 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import easv.oe.dicecup2.R
 
+//Not used for anything
+
 class DiceFragment: Fragment() {
 
     lateinit var dice:Dice

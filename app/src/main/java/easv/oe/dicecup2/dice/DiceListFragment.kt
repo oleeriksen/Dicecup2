@@ -16,12 +16,18 @@ import kotlin.math.sqrt
 private const val TAG = "DiceListFragment"
 class DiceListFragment: Fragment() {
 
+    //region vals and vars
+
     private lateinit var diceRecyclerView: RecyclerView
     private var adapter: DiceAdapter? = null
 
     private val diceListViewModel: DiceListViewModel by lazy {
         ViewModelProvider(this).get(DiceListViewModel::class.java)
     }
+
+    //endregion
+
+    //region override
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +54,12 @@ class DiceListFragment: Fragment() {
 
         return view
     }
+    //endregion
 
- fun setDiceAmount(diceAmount: Int){
+
+    //region dice
+
+    fun setDiceAmount(diceAmount: Int){
         diceListViewModel.currentDiceAmount = diceAmount
         diceListViewModel.updateDice()
         updateUI()
@@ -60,11 +70,18 @@ class DiceListFragment: Fragment() {
         updateUI()
     }
 
+    fun setDiceFromRoll(diceRollLog: DiceRollLog){
+        diceListViewModel.updateDiceFromHistory(diceRollLog)
+    }
+
     private fun updateUI() {
         val dices = diceListViewModel.dice
         adapter = DiceAdapter(dices)
         diceRecyclerView.adapter = adapter
     }
+
+    //endregion
+
 
     private inner class DiceHolder(view:View): RecyclerView.ViewHolder(view) {
         val diceImageView : ImageView = itemView.findViewById(R.id.diceImage)

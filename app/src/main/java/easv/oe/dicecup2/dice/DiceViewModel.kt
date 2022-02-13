@@ -13,14 +13,18 @@ import kotlinx.android.synthetic.main.roll.view.*
 private const val TAG= "DiceViewModel"
 class DiceViewModel : ViewModel() {
 
+    //region vals and vars
     var diceListFragment: DiceListFragment
     var currentDiceAmount = 2
+    private val diceImages = DiceImageManager().diceImages;
 
     private val utils:Utils by lazy {
         Utils()
     }
 
     var diceHistoryManager :DiceHistoryManager
+
+    //endregion
 
     init {
         Log.d(TAG, "ViewModel instance created")
@@ -34,57 +38,8 @@ class DiceViewModel : ViewModel() {
         Log.d(TAG, "ViewModel about to be destroyed")
     }
 
-    // mapping from 1..6 to drawables, the first index is unused
-    private val diceImages = DiceImageManager().diceImages;
-
-    fun performRoll(allDices: List<ImageView>) {
-
-
-        val diceRolls2 = ArrayList<Int>()
-
-        var i = 1
-        for(dice in allDices){
-            if(dice.visibility == View.VISIBLE) {
-                val ranNum = utils.getRandomInt(1, 6)
-                dice.setImageResource(diceImages[ranNum])
-                diceRolls2.add(ranNum)
-            }
-            i += 1
-        }
-
-        diceHistoryManager.addToHistory(DiceRollLog(diceRolls2))
-
-    }
-
     fun roll(){
         diceListFragment.rollDice(diceHistoryManager)
-    }
-
-    fun updateDiceVisibility(dices: List<ImageView>, diceAmount: Int) {
-        currentDiceAmount = diceAmount;
-
-        var i = 1
-        for(dice in dices){
-            if(i <= diceAmount){
-                dice.visibility = View.VISIBLE
-            }
-            else{
-                dice.visibility = View.INVISIBLE
-            }
-            i += 1
-        }
-    }
-
-
-
-    fun updateDiceFromHistory(dices: List<ImageView>) {
-        if(diceHistoryManager.historyList.isNotEmpty()){
-            val lastRoll = diceHistoryManager.getLastRoll()
-            currentDiceAmount = lastRoll.diceAmount
-            for((i, dice) in lastRoll.dices.withIndex()){
-                dices[i].setImageResource(diceImages[dice])
-            }
-        }
     }
 
     fun addDiceRollToView(view: View, rollLog: DiceRollLog) {
@@ -106,6 +61,12 @@ class DiceViewModel : ViewModel() {
             }
         }
 
+    }
+
+    fun updateFragmentDiceFromHistory() {
+        if(diceHistoryManager.historyList.isNotEmpty()){
+            diceListFragment.setDiceFromRoll(diceHistoryManager.getLastRoll())
+        }
     }
 
 

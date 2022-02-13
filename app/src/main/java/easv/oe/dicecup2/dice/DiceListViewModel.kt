@@ -4,6 +4,11 @@ import androidx.lifecycle.ViewModel
 
 class DiceListViewModel: ViewModel() {
     var currentDiceAmount = 2
+    val dice = mutableListOf<Dice>()
+
+    init {
+        dice.add(Dice())
+    }
 
     fun updateDice() {
         if(dice.size < currentDiceAmount)
@@ -32,9 +37,12 @@ class DiceListViewModel: ViewModel() {
         diceHistoryManager.addToHistory(DiceRollLog(diceRolls))
     }
 
-    val dice = mutableListOf<Dice>()
+    fun updateDiceFromHistory(lastRoll: DiceRollLog) {
 
-    init {
-        dice.add(Dice())
+        currentDiceAmount = lastRoll.diceAmount
+        updateDice()
+        for((i, die) in lastRoll.dices.withIndex()){
+            dice[i].currentEyes = die
+        }
     }
 }

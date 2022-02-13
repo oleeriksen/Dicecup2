@@ -19,6 +19,7 @@ private const val INTENT_EXTRA_DiceHistoryManager = "diceStoryActivity_intentExt
 private const val TAG = "DiceStoryActivity"
 class DiceStoryActivity() : BasicActivity() {
 
+    //region vals and vars
 
     private val diceStoryViewModel:DiceStoryViewModel by lazy {
         ViewModelProvider(this).get(DiceStoryViewModel::class.java)
@@ -26,7 +27,7 @@ class DiceStoryActivity() : BasicActivity() {
 
     private lateinit var diceHistoryManager : DiceHistoryManager
 
-
+    //endregion
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
