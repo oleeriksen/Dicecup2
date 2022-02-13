@@ -18,14 +18,8 @@ class DiceActivity : BasicActivity() {
 
     //region Vars and vals
     private val orientation: Int by lazy { resources.configuration.orientation }
-
-
     private val diceViewModel :DiceViewModel by lazy {
         ViewModelProvider(this).get(DiceViewModel::class.java)
-    }
-
-    private val diceHistoryManager: DiceHistoryManager by lazy{
-        diceViewModel.diceHistoryManager
     }
 
 
@@ -88,7 +82,8 @@ class DiceActivity : BasicActivity() {
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             btnStory.setOnClickListener { onCLickStory() }
         }else{
-            for (history in diceHistoryManager.historyList){
+            btn_clear.setOnClickListener { onClickClear() }
+            for (history in diceViewModel.diceHistoryManager.historyList){
                 addRollToHistoryUI(history, historyview)
             }
         }
@@ -128,7 +123,7 @@ class DiceActivity : BasicActivity() {
 
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             historyview.removeAllViews()
-            for (history in diceHistoryManager.historyList) {
+            for (history in diceViewModel.diceHistoryManager.historyList) {
                 addRollToHistoryUI(history, historyview)
             }
         }
@@ -137,9 +132,14 @@ class DiceActivity : BasicActivity() {
 
     private fun onCLickStory(){
 
-        val intent = DiceStoryActivity.newIntent(this, diceHistoryManager)
+        val intent = DiceStoryActivity.newIntent(this, diceViewModel.diceHistoryManager)
         startActivity(intent)
 
+    }
+
+    private fun onClickClear(){
+        diceViewModel.diceHistoryManager.historyList.clear()
+        historyview.removeAllViews()
     }
 
     //endregion

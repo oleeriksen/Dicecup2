@@ -18,10 +18,6 @@ class DiceViewModel : ViewModel() {
     var currentDiceAmount = 2
     private val diceImages = DiceImageManager().diceImages;
 
-    private val utils:Utils by lazy {
-        Utils()
-    }
-
     var diceHistoryManager :DiceHistoryManager
 
     //endregion
