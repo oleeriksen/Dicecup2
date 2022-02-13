@@ -39,8 +39,8 @@ class DiceActivity : BasicActivity() {
         setContentView(R.layout.activity_dice)
 
         setupOrientation()
-        setupFragments()
         addListeners()
+        setupFragments()
 
         loadDice()
 
@@ -155,7 +155,6 @@ class DiceActivity : BasicActivity() {
         diceViewModel.currentDiceAmount = diceAmount
         val currentDiceAmount = diceViewModel.currentDiceAmount
         tvDiceCount.text = currentDiceAmount.toString()
-        seekBarDiceAmount.progress = currentDiceAmount
 
     }
 
