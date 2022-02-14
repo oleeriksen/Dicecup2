@@ -53,4 +53,12 @@
         android:layout_width="wrap_content"
         android:background="@color/babyPink"
         android:id="@+id/gameboard"/>
+
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id = "@+id/boardHolder">
+
+    </TableLayout>
 </LinearLayout>

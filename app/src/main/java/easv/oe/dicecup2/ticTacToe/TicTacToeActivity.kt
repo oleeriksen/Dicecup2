@@ -1,30 +1,54 @@
 package easv.oe.dicecup2.ticTacToe
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TableRow
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.fragment.app.Fragment
 import easv.oe.dicecup2.R
 import kotlinx.android.synthetic.main.activity_tic_tac_toe.*
 
+private const val TAG = "TicTacToeActivity"
+
 class TicTacToeActivity : AppCompatActivity() {
 
-    val TAG = "xyz"
+    val ticTacToeViewModel:TicTacToeViewModel by lazy{
+        TicTacToeViewModel()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tic_tac_toe)
+        val currentBoardFragment = supportFragmentManager.findFragmentById(R.id.boardHolder)
+
+        if(currentBoardFragment == null) {
+            ticTacToeViewModel.boardFragment = BoardFragment.newInstance()
+
+            supportFragmentManager.beginTransaction()
+                .add(R.id.boardHolder, ticTacToeViewModel.boardFragment).commit()
+        }
+        else{
+            ticTacToeViewModel.boardFragment = currentBoardFragment as BoardFragment
+        }
 
         btnCreate.setOnClickListener { _ -> createBoard() }
     }
 
     private fun createBoard() {
+
+
+
         val rows = Integer.parseInt(etRows.text.toString())
         val cols = Integer.parseInt(etCols.text.toString())
+        ticTacToeViewModel.boardFragment.setupBoard(rows, cols)
+
+        /*
         initializeBoard(rows, cols)
         Log.d(TAG, "createBoard")
+
+         */
     }
 
 
