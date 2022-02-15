@@ -9,16 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import easv.oe.dicecup2.R
-import easv.oe.dicecup2.dice.DiceImageManager
 
-class BoardFragment: Fragment() {
+class TicTacToeBoardFragment: Fragment() {
 
     private lateinit var boardRecyclerView: RecyclerView
-    private var adapter: BoardFragment.BoardAdapter? = null
+    private var adapter: TicTacToeBoardFragment.BoardAdapter? = null
 
 
-    private val boardViewModel: BoardViewModel by lazy {
-        BoardViewModel()
+    private val ticTacToeBoardViewModel: TicTacToeBoardViewModel by lazy {
+        TicTacToeBoardViewModel()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +32,8 @@ class BoardFragment: Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_board, container, false)
         boardRecyclerView = view.findViewById(R.id.board_recycler_view) as RecyclerView
-        boardRecyclerView.layoutManager = GridLayoutManager(context, boardViewModel.colAmount)
-        boardViewModel.createBoardFields()
+        boardRecyclerView.layoutManager = GridLayoutManager(context, ticTacToeBoardViewModel.colAmount)
+        ticTacToeBoardViewModel.createBoardFields()
 
         updateUI()
 
@@ -43,21 +42,21 @@ class BoardFragment: Fragment() {
     }
 
     private fun updateUI() {
-        val boardFields = boardViewModel.boardFields
+        val boardFields = ticTacToeBoardViewModel.boardFields
         adapter = BoardAdapter(boardFields)
         boardRecyclerView.adapter = adapter
     }
 
 
     fun setupBoard(){
-        boardViewModel.createBoardFields()
-        boardRecyclerView.layoutManager = GridLayoutManager(context, boardViewModel.colAmount)
+        ticTacToeBoardViewModel.createBoardFields()
+        boardRecyclerView.layoutManager = GridLayoutManager(context, ticTacToeBoardViewModel.colAmount)
         updateUI()
     }
 
     companion object{
-        fun newInstance(): BoardFragment {
-            return BoardFragment()
+        fun newInstance(): TicTacToeBoardFragment {
+            return TicTacToeBoardFragment()
         }
     }
 
@@ -83,7 +82,7 @@ class BoardFragment: Fragment() {
 
                 boardImageview.setImageResource(boardField.getImage())
 
-                boardImageview.setOnClickListener{boardViewModel.onclickBoard(boardField, boardImageview)}
+                boardImageview.setOnClickListener{ticTacToeBoardViewModel.onclickBoard(boardField, boardImageview)}
             }
         }
     }

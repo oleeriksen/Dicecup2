@@ -4,7 +4,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 
-class BoardViewModel:ViewModel() {
+class TicTacToeBoardViewModel:ViewModel() {
     var boardFields = mutableListOf<BoardField>()
     var rowAmount = 3
     var colAmount = 3

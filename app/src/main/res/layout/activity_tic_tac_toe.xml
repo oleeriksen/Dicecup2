@@ -8,51 +8,13 @@
     android:orientation="vertical"
     tools:context=".ticTacToe.TicTacToeActivity"
     >
-    <LinearLayout
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="100dp"
-            android:gravity="right"
-            android:text="Rows:"/>
-        <EditText
-            android:layout_height="wrap_content"
-            android:layout_width="50dp"
-            android:inputType="number"
-            android:id="@+id/etRows"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="100dp"
-            android:gravity="right"
-            android:text="Cols:"/>
-        <EditText
-            android:layout_height="wrap_content"
-            android:layout_width="50dp"
-            android:inputType="number"
-            android:id="@+id/etCols"/>
-    </LinearLayout>
 
     <Button
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="Create"
+        android:text="New Board"
         android:layout_gravity="center"
         android:id="@+id/btnCreate"/>
-
-    <TableLayout
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:background="@color/babyPink"
-        android:id="@+id/gameboard"/>
 
 
     <TableLayout

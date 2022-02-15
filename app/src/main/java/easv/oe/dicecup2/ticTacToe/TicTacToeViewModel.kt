@@ -5,12 +5,12 @@ import androidx.lifecycle.ViewModel
 
 private const val TAG =  "TicTacToeViewModel"
 class TicTacToeViewModel : ViewModel() {
-    var boardFragment: BoardFragment
+    var ticTacToeBoardFragment: TicTacToeBoardFragment
     var currentPlayer: Int = 1
 
     init {
         Log.d(TAG, "ViewModel created")
-        boardFragment = BoardFragment()
+        ticTacToeBoardFragment = TicTacToeBoardFragment()
     }
 
     fun nextPlayer(){
