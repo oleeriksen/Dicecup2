@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import easv.oe.dicecup2.R
+import easv.oe.dicecup2.dice.DiceImageManager
 
 class BoardFragment: Fragment() {
 
@@ -48,8 +49,8 @@ class BoardFragment: Fragment() {
     }
 
 
-    fun setupBoard(rows:Int, cols: Int){
-        boardViewModel.setupBoard(rows, cols)
+    fun setupBoard(){
+        boardViewModel.createBoardFields()
         boardRecyclerView.layoutManager = GridLayoutManager(context, boardViewModel.colAmount)
         updateUI()
     }
@@ -77,8 +78,11 @@ class BoardFragment: Fragment() {
 
         override fun onBindViewHolder(holder: BoardHolder, position: Int) {
             val boardField = boardfields[position]
+            boardField.position = position
             holder.apply {
+
                 boardImageview.setImageResource(boardField.getImage())
+
                 boardImageview.setOnClickListener{boardViewModel.onclickBoard(boardField, boardImageview)}
             }
         }

@@ -5,6 +5,7 @@ import easv.oe.dicecup2.R
 data class BoardField(val row: Int, val col:Int) {
 
     var state = State.FREE
+    var position = 0
 
 
     fun getImage(): Int {

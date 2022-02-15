@@ -37,14 +37,11 @@ class TicTacToeActivity : AppCompatActivity() {
     }
 
     private fun createBoard() {
-
-
-
-        val rows = Integer.parseInt(etRows.text.toString())
-        val cols = Integer.parseInt(etCols.text.toString())
-        ticTacToeViewModel.boardFragment.setupBoard(rows, cols)
+        ticTacToeViewModel.boardFragment.setupBoard()
 
         /*
+         val rows = Integer.parseInt(etRows.text.toString())
+        val cols = Integer.parseInt(etCols.text.toString())
         initializeBoard(rows, cols)
         Log.d(TAG, "createBoard")
 
