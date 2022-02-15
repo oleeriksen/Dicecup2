@@ -50,6 +50,7 @@ class BoardFragment: Fragment() {
 
     fun setupBoard(rows:Int, cols: Int){
         boardViewModel.setupBoard(rows, cols)
+        boardRecyclerView.layoutManager = GridLayoutManager(context, boardViewModel.colAmount)
         updateUI()
     }
 
