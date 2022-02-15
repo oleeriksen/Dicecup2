@@ -2,14 +2,20 @@ package easv.oe.dicecup2.dice
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.LinearLayout
 import android.widget.SeekBar
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
+import com.github.nisrulz.sensey.Sensey
+import com.github.nisrulz.sensey.ShakeDetector.ShakeListener
 import easv.oe.dicecup2.BasicActivity
 import easv.oe.dicecup2.R
 import kotlinx.android.synthetic.main.activity_dice.*
+import java.time.Duration
+
 
 private const val TAG = "DiceActivity"
 
@@ -18,9 +24,12 @@ class DiceActivity : BasicActivity() {
 
     //region Vars and vals
     private val orientation: Int by lazy { resources.configuration.orientation }
+    private val SHAKE_THRESHOLD = 60F;
+    private val TIME = 300L;
     private val diceViewModel :DiceViewModel by lazy {
         ViewModelProvider(this).get(DiceViewModel::class.java)
     }
+
 
 
     //endregion
@@ -31,6 +40,17 @@ class DiceActivity : BasicActivity() {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "OnCreate(Bundle?) called")
         setContentView(R.layout.activity_dice)
+        Sensey.getInstance().init(this);
+
+        val shakeListener: ShakeListener = object : ShakeListener {
+            override fun onShakeDetected() {
+            }
+
+            override fun onShakeStopped() {
+                onClickRoll()
+            }
+        }
+        Sensey.getInstance().startShakeDetection(SHAKE_THRESHOLD, TIME,shakeListener);
 
         setupOrientation()
         addListeners()
@@ -77,8 +97,6 @@ class DiceActivity : BasicActivity() {
     //region Setup Listeners
 
     private fun addListeners() {
-
-
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             btnStory.setOnClickListener { onCLickStory() }
         }else{
@@ -169,5 +187,4 @@ class DiceActivity : BasicActivity() {
         diceViewModel.addDiceRollToView(view, rollLog)
         v.addView(view)
     }
-
 }
