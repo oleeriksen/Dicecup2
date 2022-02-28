@@ -25,8 +25,6 @@ class DiceStoryActivity() : BasicActivity() {
         ViewModelProvider(this).get(DiceStoryViewModel::class.java)
     }
 
-    private lateinit var diceHistoryManager : DiceHistoryManager
-
     //endregion
 
     @SuppressLint("ResourceAsColor")
@@ -35,13 +33,26 @@ class DiceStoryActivity() : BasicActivity() {
         setContentView(R.layout.activity_story)
         Log.d(TAG, "OnCreate(Bundle?) called")
 
-        diceHistoryManager = intent.getSerializableExtra(INTENT_EXTRA_DiceHistoryManager) as DiceHistoryManager
+        diceStoryViewModel.diceHistoryManager = intent.getSerializableExtra(INTENT_EXTRA_DiceHistoryManager) as DiceHistoryManager
 
-
-        for (history in diceHistoryManager.historyList){
-            addCustomUI(history)
+        val currentDiceListFragment = supportFragmentManager.findFragmentById(R.id.diceRollListFragment)
+        if(currentDiceListFragment == null) {
+            diceStoryViewModel.diceRollListFragment = DiceRollListFragment.newInstance()
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.diceRollListFragment, diceStoryViewModel.diceRollListFragment)
+                .commit()
+        }
+        else{
+            diceStoryViewModel.diceRollListFragment = currentDiceListFragment as DiceRollListFragment
         }
 
+
+
+        for (history in diceStoryViewModel.diceHistoryManager.historyList){
+            addCustomUI(history)
+        }
+        //diceStoryViewModel.updateFragment(diceStoryViewModel.diceHistoryManager)
         back.setOnClickListener{ onClickBack()}
     }
 
