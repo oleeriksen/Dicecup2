@@ -13,10 +13,12 @@ import kotlinx.android.synthetic.main.roll.view.*
 private const val TAG= "DiceViewModel"
 class DiceViewModel : ViewModel() {
 
+    var diceRollListFragment: DiceRollListFragment
+
     //region vals and vars
     var diceListFragment: DiceListFragment
     var currentDiceAmount = 2
-    private val diceImages = DiceImageManager().diceImages;
+    val diceImages = DiceImageManager().diceImages;
 
     var diceHistoryManager :DiceHistoryManager
 
@@ -26,6 +28,7 @@ class DiceViewModel : ViewModel() {
         Log.d(TAG, "ViewModel instance created")
         diceHistoryManager = DiceHistoryManager();
         diceListFragment = DiceListFragment()
+        diceRollListFragment = DiceRollListFragment()
 
     }
 

@@ -19,13 +19,13 @@ class DiceRollListFragment: Fragment() {
     private lateinit var diceRollRecyclerView: RecyclerView
     private var adapter: DiceRollAdapter? = null
 
-    private val diceRollListViewModel: DiceRollListViewModel by lazy {
-        ViewModelProvider(this).get(DiceRollListViewModel:: class.java)
+    private val diceRollListViewModel: DiceViewModel by lazy {
+        ViewModelProvider(requireActivity()).get(DiceViewModel:: class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "Total diceRolls: ${diceRollListViewModel.rolls.size}")
+        Log.d(TAG, "Total diceRolls: ${diceRollListViewModel.diceHistoryManager.historyList.size}")
     }
 
     override fun onCreateView(
@@ -43,12 +43,8 @@ class DiceRollListFragment: Fragment() {
         return  view
     }
 
-    fun setHistory(diceHistoryManager: DiceHistoryManager){
-        diceRollListViewModel.setRolls(diceHistoryManager)
-    }
-
     private fun updateUI(){
-        val diceRolls = diceRollListViewModel.rolls
+        val diceRolls = diceRollListViewModel.diceHistoryManager.historyList
         adapter = DiceRollAdapter(diceRolls)
         diceRollRecyclerView.adapter =adapter
     }

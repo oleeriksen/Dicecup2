@@ -22,9 +22,7 @@ class DiceStoryViewModel: ViewModel() {
         diceHistoryManager = DiceHistoryManager()
     }
 
-    fun updateFragment(diceHistoryManager: DiceHistoryManager) {
-        diceRollListFragment.setHistory(diceHistoryManager)
-    }
+
 
 
 }

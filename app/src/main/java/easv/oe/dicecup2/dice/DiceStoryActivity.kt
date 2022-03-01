@@ -21,8 +21,8 @@ class DiceStoryActivity() : BasicActivity() {
 
     //region vals and vars
 
-    private val diceStoryViewModel:DiceStoryViewModel by lazy {
-        ViewModelProvider(this).get(DiceStoryViewModel::class.java)
+    private val diceStoryViewModel:DiceViewModel by lazy {
+        ViewModelProvider(this).get(DiceViewModel::class.java)
     }
 
     //endregion
@@ -52,7 +52,6 @@ class DiceStoryActivity() : BasicActivity() {
         for (history in diceStoryViewModel.diceHistoryManager.historyList){
             addCustomUI(history)
         }
-        //diceStoryViewModel.updateFragment(diceStoryViewModel.diceHistoryManager)
         back.setOnClickListener{ onClickBack()}
     }
 
@@ -80,7 +79,7 @@ class DiceStoryActivity() : BasicActivity() {
         for((i, dice) in allDices.withIndex()){
             if(i<rollLog.diceAmount){
                 dice.visibility = View.VISIBLE
-                allDices[i].setImageResource(diceStoryViewModel.diceImageManager.diceImages[rollLog.dices[i]])
+                allDices[i].setImageResource(diceStoryViewModel.diceImages[rollLog.dices[i]])
             }
             else{
                 dice.visibility = View.GONE
