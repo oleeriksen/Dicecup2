@@ -53,10 +53,14 @@ class DiceRollListFragment: Fragment() {
         : RecyclerView.ViewHolder(view){
         private lateinit var diceRollLog: DiceRollLog
         private val dieEyesTextView: TextView = itemView.findViewById(R.id.die_eyes)
+        private val txt_Rolls: TextView = itemView.findViewById(R.id.txt_Rolls)
+        private val txt_Dato: TextView = itemView.findViewById(R.id.txt_Dato)
 
         fun bind(diceRollLog: DiceRollLog){
             this.diceRollLog = diceRollLog
-            dieEyesTextView.text = this.diceRollLog.toString()
+            dieEyesTextView.text = this.diceRollLog.diceAmountString
+            txt_Rolls.text = this.diceRollLog.toString()
+            txt_Dato.text = this.diceRollLog.diceTimeString
         }
 
     }

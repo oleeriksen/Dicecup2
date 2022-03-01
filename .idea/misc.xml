@@ -4,9 +4,6 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Cecilie/Datamatiker/Mobile/First app/Dicecup2/app/src/main/res/layout/activity_calculator.xml" value="0.26436781609195403" />
-        <entry key="..\:/Cecilie/Datamatiker/Mobile/First app/Dicecup2/app/src/main/res/layout/activity_dice.xml" value="0.24557823129251702" />
-        <entry key="..\:/Cecilie/Datamatiker/Mobile/First app/Dicecup2/app/src/main/res/layout/activity_story.xml" value="0.18802083333333333" />
-        <entry key="..\:/Cecilie/Datamatiker/Mobile/First app/Dicecup2/app/src/main/res/layout/list_item_diceroll.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/cecil/Github/Mobile/Dicecup2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2595" />
         <entry key="..\:/Users/cecil/Github/Mobile/Dicecup2/app/src/main/res/drawable/buttonstyle.xml" value="0.2595" />
         <entry key="..\:/Users/cecil/Github/Mobile/Dicecup2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2595" />
@@ -15,26 +12,12 @@
         <entry key="..\:/Users/cecil/Github/Mobile/Dicecup2/app/src/main/res/layout/activity_main.xml" value="0.23183760683760685" />
         <entry key="..\:/Users/cecil/Github/Mobile/Dicecup2/app/src/main/res/layout/activity_story.xml" value="0.264" />
         <entry key="..\:/Users/cecil/Github/Mobile/Dicecup2/app/src/main/res/layout/activity_welcome.xml" value="0.11302083333333333" />
-        <entry key="..\:/Users/cecil/Github/Mobile/Dicecup2/app/src/main/res/layout/dice_fragment.xml" value="0.1" />
-        <entry key="..\:/Users/cecil/Github/Mobile/Dicecup2/app/src/main/res/layout/fragment_dice_list.xml" value="0.20863616930312098" />
-        <entry key="..\:/Users/cecil/Github/Mobile/Dicecup2/app/src/main/res/layout/roll.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/cecil/Github/Mobile/Dicecup2/app/src/main/res/menu/main_menu.xml" value="0.2296875" />
-        <entry key="..\:/dev/dicecup2/Dicecup2/app/src/main/res/drawable/boardstyle.xml" value="0.328" />
-        <entry key="..\:/dev/dicecup2/Dicecup2/app/src/main/res/drawable/buttonstyle.xml" value="0.328" />
-        <entry key="..\:/dev/dicecup2/Dicecup2/app/src/main/res/layout-land/activity_dice.xml" value="0.30687830687830686" />
-        <entry key="..\:/dev/dicecup2/Dicecup2/app/src/main/res/layout/activity_dice.xml" value="0.25" />
+        <entry key="..\:/dev/dicecup2/Dicecup2/app/src/main/res/layout/activity_dice.xml" value="0.33" />
         <entry key="..\:/dev/dicecup2/Dicecup2/app/src/main/res/layout/activity_main.xml" value="0.1859375" />
         <entry key="..\:/dev/dicecup2/Dicecup2/app/src/main/res/layout/activity_story.xml" value="0.22" />
-        <entry key="..\:/dev/dicecup2/Dicecup2/app/src/main/res/layout/activity_tic_tac_toe.xml" value="0.360054347826087" />
         <entry key="..\:/dev/dicecup2/Dicecup2/app/src/main/res/layout/activity_welcome.xml" value="0.1859375" />
-        <entry key="..\:/dev/dicecup2/Dicecup2/app/src/main/res/layout/dice_fragment.xml" value="0.360054347826087" />
-        <entry key="..\:/dev/dicecup2/Dicecup2/app/src/main/res/layout/fragment_board.xml" value="0.360054347826087" />
-        <entry key="..\:/dev/dicecup2/Dicecup2/app/src/main/res/layout/fragment_boardfield.xml" value="0.360054347826087" />
-        <entry key="..\:/dev/dicecup2/Dicecup2/app/src/main/res/layout/fragment_dice_list.xml" value="0.360054347826087" />
         <entry key="..\:/dev/dicecup2/Dicecup2/app/src/main/res/layout/roll.xml" value="0.25" />
-        <entry key="..\:/work/android/Dicecup2/app/src/main/res/layout-land/activity_dice.xml" value="0.1" />
-        <entry key="..\:/work/android/Dicecup2/app/src/main/res/layout/activity_dice.xml" value="0.33" />
-        <entry key="..\:/work/android/Dicecup2/app/src/main/res/layout/activity_welcome.xml" value="0.20871327254305977" />
         <entry key="..\:/work/mobile/Dicecup2/app/src/main/res/layout/activity_dice.xml" value="0.36666666666666664" />
         <entry key="..\:/work/mobile/Dicecup2/app/src/main/res/layout/activity_main.xml" value="0.2798913043478261" />
         <entry key="..\:/work/mobile/Dicecup2/app/src/main/res/layout/activity_story.xml" value="0.36666666666666664" />
@@ -43,7 +26,15 @@
         <entry key="app/src/main/res/layout/activity_dice.xml" value="0.42112013681060284" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.182518115942029" />
         <entry key="app/src/main/res/layout/activity_story.xml" value="0.42112013681060284" />
-        <entry key="app/src/main/res/layout/roll.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_tic_tac_toe.xml" value="0.23557075673364686" />
+        <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.23557075673364686" />
+        <entry key="app/src/main/res/layout/dice_fragment.xml" value="0.23557075673364686" />
+        <entry key="app/src/main/res/layout/fragment_board.xml" value="0.23557075673364686" />
+        <entry key="app/src/main/res/layout/fragment_boardfield.xml" value="0.23557075673364686" />
+        <entry key="app/src/main/res/layout/fragment_dice_list.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_diceroll_list.xml" value="0.23557075673364686" />
+        <entry key="app/src/main/res/layout/list_item_diceroll.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/roll.xml" value="0.35162731333758773" />
       </map>
     </option>
   </component>

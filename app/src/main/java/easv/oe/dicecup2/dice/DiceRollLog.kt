@@ -1,12 +1,14 @@
 package easv.oe.dicecup2.dice
 
 import java.io.Serializable
-import java.lang.StringBuilder
+import java.text.SimpleDateFormat
 import java.util.*
 
 data class DiceRollLog(val dices: ArrayList<Int>) : Serializable {
 
-    val date: Date = Calendar.getInstance().time
+    val date: Date = Calendar.getInstance().time;
+    var format: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
+    var formatted = format.format(date)
 
     val diceAmount: Int
         get() = dices.size
@@ -14,10 +16,12 @@ data class DiceRollLog(val dices: ArrayList<Int>) : Serializable {
     val diceAmountString: String
         get() = "Amount of rolled dice: $diceAmount"
 
+    val diceTimeString: String
+        get() = "Time of Roll: $formatted"
 
     private val rollInstance: String
         get() {
-            val str = StringBuilder("Time of Roll: $date - Amount of Dice: $diceAmount - Roll Instance: ")
+            val str = StringBuilder("");
             for (i in dices.indices) {
                 str.append(dices[i])
                 if (i < dices.size - 1) {

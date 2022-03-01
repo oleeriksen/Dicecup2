@@ -4,9 +4,7 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import androidx.lifecycle.ViewModel
-import easv.oe.dicecup2.Utils
 import kotlinx.android.synthetic.main.roll.view.*
 
 

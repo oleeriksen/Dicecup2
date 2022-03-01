@@ -8,11 +8,14 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.CompoundButton
+import android.widget.LinearLayout
 import androidx.lifecycle.ViewModelProvider
 import easv.oe.dicecup2.BasicActivity
 import easv.oe.dicecup2.R
 import kotlinx.android.synthetic.main.activity_story.*
 import kotlinx.android.synthetic.main.roll.view.*
+
 
 private const val INTENT_EXTRA_DiceHistoryManager = "diceStoryActivity_intentExtra_HistoryManager"
 
@@ -47,12 +50,13 @@ class DiceStoryActivity() : BasicActivity() {
             diceStoryViewModel.diceRollListFragment = currentDiceListFragment as DiceRollListFragment
         }
 
-
-
         for (history in diceStoryViewModel.diceHistoryManager.historyList){
             addCustomUI(history)
         }
         back.setOnClickListener{ onClickBack()}
+        swt_text.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+            onClickText()
+        })
     }
 
     companion object {
@@ -63,7 +67,35 @@ class DiceStoryActivity() : BasicActivity() {
     }
 
 
-
+    private fun onClickText() {
+        if(swt_text.isChecked){
+            val scrollParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                0,
+                1.0f
+            )
+            val scrollParams2 = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                0,
+                0f
+            )
+            scrollView4.setLayoutParams(scrollParams)
+            scrollView3.setLayoutParams(scrollParams2)
+        } else {
+            val scrollParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                0,
+                1.0f
+            )
+            val scrollParams2 = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                0,
+                0f
+            )
+            scrollView4.setLayoutParams(scrollParams2)
+            scrollView3.setLayoutParams(scrollParams)
+        }
+    }
 
 
     @SuppressLint("ResourceAsColor")
@@ -74,6 +106,8 @@ class DiceStoryActivity() : BasicActivity() {
         view.txtRollText.text = rollLog.diceAmountString
         view.txtRollText.setTypeface(null, Typeface.BOLD)
         view.txtRollText.setTextColor(Color.WHITE)
+        view.txt_date.text = rollLog.diceTimeString;
+        view.txt_date.setTextColor(Color.WHITE);
 
         //For each dice, if the dice has an index lower than the total amount of dices in the current diceRollLog, the dice will be shown with an image;
         for((i, dice) in allDices.withIndex()){

@@ -2,19 +2,16 @@ package easv.oe.dicecup2.dice
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.LinearLayout
 import android.widget.SeekBar
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import com.github.nisrulz.sensey.Sensey
 import com.github.nisrulz.sensey.ShakeDetector.ShakeListener
 import easv.oe.dicecup2.BasicActivity
 import easv.oe.dicecup2.R
 import kotlinx.android.synthetic.main.activity_dice.*
-import java.time.Duration
 
 
 private const val TAG = "DiceActivity"
@@ -108,6 +105,7 @@ class DiceActivity : BasicActivity() {
         btnRoll.setOnClickListener { onClickRoll() }
         seekBarDiceAmount.setOnSeekBarChangeListener(diceAmountSetupListener())
     }
+
 
     private fun diceAmountSetupListener(): SeekBar.OnSeekBarChangeListener{
         return object :
